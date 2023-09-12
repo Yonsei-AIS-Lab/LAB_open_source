@@ -12,10 +12,13 @@ def main():
     for num in numbers:
         result = divide(num, divisor)
 
-        if result > 5:
-            print("Result is greater than 5.")
+        if isinstance(result, (int, float)):
+            if result > 5:
+                print("Result is greater than 5.")
+            else:
+                print("Result is smaller than 5.")
         else:
-            print("Result is smaller than 5.")
+            print(result)
 
 if __name__ == "__main__":
     main()
