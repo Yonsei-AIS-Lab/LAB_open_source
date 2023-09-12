@@ -14,4 +14,4 @@ if __name__ == "__main__":
 
         print(f"{num1}와 {num2}의 최대 공약수는 {gcd_result}입니다.")
     except ValueError:
-        print("올바른 정수를 입력하세요.")
+        print("정수를 입력하세요(정수가 아니거나 음수는 오류입니다).")
