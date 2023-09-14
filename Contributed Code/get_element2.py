@@ -1,4 +1,5 @@
-#numpy 모듈 사용안함 import numpy as np
+import numpy as np
+
 def get_list_element(data_list, index): #try except 예외처리
     try:
         element = data_list[index]
@@ -8,10 +9,15 @@ def get_list_element(data_list, index): #try except 예외처리
         return None
 
 if __name__ == "__main__":
-    my_list = [1, 2, 3]
-    index = 5
-
-    result = get_list_element(my_list, index)
+    my_list = np.arange(1, 100)
     
-    if result is not None:
-        print(result)
+    try:
+        index = int(input())
+        
+        result = get_list_element(my_list, index)
+        
+        if result is not None:
+            print(result)
+            
+    except ValueError:
+        print("ValueError : 정수 입력 주의")
