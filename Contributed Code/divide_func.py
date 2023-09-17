@@ -1,4 +1,6 @@
 def divide(a, b):
+    if b == 0:
+        return None
     result = a / b
     return result
 
@@ -8,7 +10,11 @@ def main():
 
     for num in numbers:
         result = divide(num, divisor)
-
+        
+        if result is None:
+            print("Cannot divide by zero.")
+            continue
+        
         if result > 5:
             print("Result is greater than 5.")
         else:

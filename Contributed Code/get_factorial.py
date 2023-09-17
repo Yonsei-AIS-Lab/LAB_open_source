@@ -4,6 +4,8 @@ if __name__ == "__main__":
 
     if num < 0:
         print("음수는 팩토리얼을 계산할 수 없습니다.")
+    elif num == 0:
+        print("0! = 1")
     else:
         for i in range(1, num + 1):
             factorial *= i
