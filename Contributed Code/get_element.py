@@ -1,4 +1,5 @@
 def get_list_element(data_list, index):
+
     try:
         element = data_list[index]
         return element
