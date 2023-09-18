@@ -1,9 +1,9 @@
 def get_list_element(data_list, index):
-    if index < 0 or index >= len(data_list):
-        return "Index out of range."
-    element = data_list[index]
-    
-    return element
+    try:
+        element = data_list[index]
+        return element
+    except IndexError:
+        return "인덱스가 범위를 벗어났습니다."
 
 if __name__ == "__main__":
     my_list = [1, 2, 3]
