@@ -1,24 +1,21 @@
 import numpy as np
 
 def get_list_element(data_list, index):
-    element = data_list[index]
-    
-    return element
+    try:
+        element = data_list[index]
+        return element
+    except IndexError:
+        return None
 
 if __name__ == "__main__":
     my_list = np.arange(1, 100)
-    len_mylist = len(my_list)
-    
-    # Index out of range에 대한 예외처리 코드 추가
-    print(f"Instruction: input a number from 0 ~ {len_mylist-1}")
-    
-    while (True):
-        index = int(input("input: "))
-        if 0 <= index <= len_mylist-1: # 조건을 만족한다면 break하기
-            break
-        else:
-            print("Follow the instruction!")
+    try:
+        index = int(input("인덱스를 입력하세요: "))
+        result = get_list_element(my_list, index)
 
-    result = get_list_element(my_list, index)
-    print(f"result: {result}")
-    
+        if result is not None:
+            print(result)
+        else:
+            print("인덱스가 리스트 범위를 벗어났습니다.")
+    except ValueError:
+        print("올바른 정수를 입력하세요.")
