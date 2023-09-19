@@ -9,6 +9,9 @@ class Trie:
         self.root = TrieNode()
 
     def insert(self, word):
+        if not word:
+            return
+        
         node = self.root
         for char in word:
             if char not in node.children:
@@ -18,6 +21,9 @@ class Trie:
         node.frequency += 1
 
     def search(self, word):
+        if not word:
+            return False
+        
         node = self.root
         for char in word:
             if char not in node.children:
@@ -26,6 +32,9 @@ class Trie:
         return node.is_end_of_word
 
     def startsWith(self, prefix):
+        if not prefix:
+            return False
+            
         node = self.root
         for char in prefix:
             if char not in node.children:
@@ -34,6 +43,9 @@ class Trie:
         return True
 
     def autocomplete(self, prefix):
+        if not prefix:
+            return []
+        
         def dfs(node, path):
             suggestions = []
             if node.is_end_of_word:
