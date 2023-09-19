@@ -7,13 +7,14 @@ if __name__ == "__main__":
     try:
         num1 = int(input("첫 번째 정수를 입력하세요: "))
         num2 = int(input("두 번째 정수를 입력하세요: "))
+    except ValueError:
+        print("양수만 입력해주세요")
+        exit()
 
-        if num1 < 0 or num2 < 0:
-            raise ValueError("양의 정수만 입력 가능합니다.")
-        
-        gcd_result = gcd(num1, num2)
+    if num1 < 0 or num2 < 0:
+        print("양수만 입력해주세요")
+        exit()
 
-        print(f"{num1}와 {num2}의 최대 공약수는 {gcd_result}입니다.")
+    gcd_result = gcd(num1, num2)
 
-    except ValueError as e:
-        print(e)
+    print(f"{num1}와 {num2}의 최대 공약수는 {gcd_result}입니다.")
