@@ -8,7 +8,9 @@ if __name__ == "__main__":
         num1 = int(input("첫 번째 정수를 입력하세요: "))
         num2 = int(input("두 번째 정수를 입력하세요: "))
 
-        if num1 < 0 or num2 < 0:
+        if num1 == 0 and num2 == 0: #추가: 정의할 수 없는 경우
+            raise ValueError("0과 0의 최대 공약수는 정의할 수 없습니다.")
+        elif num1 < 0 or num2 < 0:
             raise ValueError("양의 정수만 입력 가능합니다.")
         
         gcd_result = gcd(num1, num2)
