@@ -1,19 +1,19 @@
 def tsp_nearest_neighbor(dist):
-    n = len(dist)
-    visited = [False] * n
+    num_cities = len(dist) # change n -> num_cities
+    visited = [False] * num_cities
     tour = [0]  # Start from city 0
     visited[0] = True
     total_distance = 0
     
-    for _ in range(n - 1):
+    for _ in range(num_cities - 1):
         current_city = tour[-1]
         min_distance = float('inf')
         nearest_city = None
         
-        for i in range(n):
-            if not visited[i] and dist[current_city][i] < min_distance:
-                min_distance = dist[current_city][i]
-                nearest_city = i
+        for candidate_city in range(num_cities): # change i -> candidate_city
+            if not visited[candidate_city] and dist[current_city][candidate_city] < min_distance:
+                min_distance = dist[current_city][candidate_city]
+                nearest_city = candidate_city
         
         tour.append(nearest_city)
         visited[nearest_city] = True
