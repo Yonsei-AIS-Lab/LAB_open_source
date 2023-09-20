@@ -9,6 +9,9 @@ class Trie:
         self.root = TrieNode()
 
     def insert(self, word):
+        if not word:
+            return
+
         node = self.root
         for char in word:
             if char not in node.children:
