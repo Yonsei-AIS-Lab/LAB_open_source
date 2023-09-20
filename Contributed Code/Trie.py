@@ -49,7 +49,7 @@ class Trie:
         def dfs(node, path):
             suggestions = []
             if node.is_end_of_word:
-                suggestions.append(path)
+                suggestions.append((path, node.frequency)) # 빈도수를 함께 반환하도록 수정
             
             for char, child_node in node.children.items():
                 suggestions.extend(dfs(child_node, path + char))
@@ -64,14 +64,10 @@ class Trie:
             node = node.children[char]
 
         suggestions = dfs(node, prefix)
-        suggestions.sort(key=lambda x: (-self.get_frequency(x), x))
-        return suggestions[:3]
+        suggestions.sort(key=lambda x: (-x[1], x[0])) #빈도와 단어를 함께 정렬
+        return [suggestion[0] for suggestion in suggestions[:3]] # 단어만 반환
 
-    def get_frequency(self, word):
-        node = self.root
-        for char in word:
-            node = node.children[char]
-        return node.frequency
+        #get_frequency 함수를 삭제해도 동일하게 동작함
 
 # Example usage:
 if __name__ == "__main__":
