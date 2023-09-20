@@ -17,7 +17,7 @@ def shortest_path(graph, start, end):
         if current_node == end:
             path = []
             while current_node in previous_nodes:
-                path.insert(0, previous_nodes)
+                path.insert(0, current_node)
                 current_node = previous_nodes[current_node]
             path.insert(0, end)
             return path
