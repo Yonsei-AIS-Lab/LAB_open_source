@@ -21,6 +21,9 @@ class Trie:
         node.frequency += 1
 
     def search(self, word):
+        if not word:
+            return False
+
         node = self.root
         for char in word:
             if char not in node.children:
