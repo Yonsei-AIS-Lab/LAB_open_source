@@ -2,7 +2,7 @@ import heapq
 
 def shortest_path(graph, start, end):
     # Initialize distances dictionary with infinite values
-    distances = {node: float('infinity') for node in graph}
+    distances = {node: float('inf') for node in graph}
     distances[start] = 0
     
     # Initialize priority queue with (distance, node) tuples
