@@ -4,7 +4,7 @@ class SortedStack:
     
     def push(self, val):
         temp_stack = []
-        while self.stack and self.stack[-1] > val:
+        while self.stack and self.stack[-1] < val:
             temp_stack.append(self.stack.pop())
         self.stack.append(val)
         while temp_stack:
@@ -13,7 +13,7 @@ class SortedStack:
     def pop(self):
         if not self.stack:
             return -1
-        return self.stack.pop(0)
+        return self.stack.pop()
     
     def display(self):
         print(self.stack)
