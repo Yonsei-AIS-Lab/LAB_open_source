@@ -13,7 +13,7 @@ class SortedStack:
     def pop(self):
         if not self.stack:
             return -1
-        return self.stack.pop()
+        return self.stack.pop(0) # add 0
     
     def display(self):
         print(self.stack)
