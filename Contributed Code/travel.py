@@ -1,5 +1,10 @@
 def tsp_nearest_neighbor(dist):
     n = len(dist)
+
+    for row in dist:
+        if len(row) != n:
+            raise ValueError("행렬은 n x n 이어야 합니다.")
+    
     visited = [False] * n
     tour = [0]  # Start from city 0
     visited[0] = True
