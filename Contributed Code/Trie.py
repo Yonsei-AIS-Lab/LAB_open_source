@@ -67,11 +67,11 @@ class Trie:
         suggestions.sort(key=lambda x: (-self.get_frequency(x), x)) # 빈도수를 기준으로 내림차순 정렬
         return suggestions[:3]  # 상위 3개의 자동완성 제안 반환
 
-    def get_frequency(self, word):
+    def get_frequency(self, word):  # 해당 문자가 Trie에서 얼마나 자주 나타내는지 확인하는 용도 / Trie는 중복 단어를 처리하는 데 효과적이며 단어의 등장 빈도수를 확인할 수 있다.
         node = self.root
         for char in word:
             node = node.children[char]
-        return node.frequency
+        return node.frequency   # 주어진 단어의 빈도수 반환
 
 # Example usage:
 if __name__ == "__main__":
