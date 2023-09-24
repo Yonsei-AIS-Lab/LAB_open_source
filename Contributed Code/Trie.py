@@ -1,12 +1,11 @@
 class TrieNode:
     def __init__(self):
-        self.children = {}
-        self.is_end_of_word = False
-        self.frequency = 0
-
+        self.children = {}  # 현재 노드에서 가능한 다음 문자들을 저장
+        self.is_end_of_word = False  # 이 노드가 단어의 끝인지를 나타냄
+        self.frequency = 0  # 해당 단어의 출현 빈도
 class Trie:
     def __init__(self):
-        self.root = TrieNode()
+        self.root = TrieNode() # root 노드 생성
 
     def insert(self, word):
         if not word:
@@ -46,7 +45,7 @@ class Trie:
         if not prefix:
             return []
         
-        def dfs(node, path):
+        def dfs(node, path):# 깊이 우선 탐색으로 가능한 모든 단어를 찾아내는 함수
             suggestions = []
             if node.is_end_of_word:
                 suggestions.append(path)
@@ -64,8 +63,8 @@ class Trie:
             node = node.children[char]
 
         suggestions = dfs(node, prefix)
-        suggestions.sort(key=lambda x: (-self.get_frequency(x), x))
-        return suggestions[:3]
+        suggestions.sort(key=lambda x: (-self.get_frequency(x), x)) # 출현 빈도와 알파벳 순으로 정렬
+        return suggestions[:3] # 상위 세 개의 추천 단어 반환
 
     def get_frequency(self, word):
         node = self.root
@@ -73,7 +72,7 @@ class Trie:
             node = node.children[char]
         return node.frequency
 
-# Example usage:
+
 if __name__ == "__main__":
     trie = Trie()
     trie.insert("apple")
