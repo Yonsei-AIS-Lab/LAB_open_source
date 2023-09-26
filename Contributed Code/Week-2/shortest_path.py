@@ -16,13 +16,12 @@ def shortest_path(graph, start, end):
         
         if current_node == end:
             path = []
-            while current_node in previous_nodes:
-                path.insert(0, current_node)
-                current_node = previous_nodes[current_node]
-            path.insert(0, start)
-            return path
+            while current_node:
+                path.append(current_node)
+                current_node = previous_nodes.get(current_node)
+            return path[::-1]
         
-        for neighbor, weight in graph[current_node]:
+        for neighbor, weight in graph.get(current_node, []):
             distance = current_distance + weight
             
             if distance < distances[neighbor]:
