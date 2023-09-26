@@ -1,4 +1,4 @@
-CONTACTS_FILE = "contacts.txt"
+CONTACTS_FILE = "./contacts.txt" # 비어있는 contacs.txt에 [] 넣어야 오류가 안 남.
 
 def read_contacts():
     try:
