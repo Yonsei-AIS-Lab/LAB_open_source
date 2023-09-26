@@ -1,6 +1,10 @@
 import heapq
 
 def shortest_path(graph, start, end):
+    # 인풋 에러 메시지 표시
+    if start not in graph or end not in graph:
+        raise ValueError("start나 end가 graph안에 없습니다.")
+    
     # Initialize distances dictionary with infinite values
     distances = {node: float('infinity') for node in graph}
     distances[start] = 0
@@ -39,7 +43,7 @@ graph = {
     'D': []
 }
 
-start = 'A'
+start = 'Aa'
 end = 'D'
 
 result = shortest_path(graph, start, end)

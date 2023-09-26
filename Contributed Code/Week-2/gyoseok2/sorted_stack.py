@@ -1,14 +1,11 @@
+import bisect
 class SortedStack:
     def __init__(self):
         self.stack = []
     
     def push(self, val):
-        temp_stack = []
-        while self.stack and self.stack[-1] < val:
-            temp_stack.append(self.stack.pop())
-        self.stack.append(val)
-        while temp_stack:
-            self.stack.append(temp_stack.pop())
+        #코드 단순화 및 시간 복잡도 개선
+        bisect.insort(self.stack, val, key=lambda x: -x)
     
     def pop(self):
         if not self.stack:
