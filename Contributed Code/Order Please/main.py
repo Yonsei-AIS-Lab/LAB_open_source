@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     order2 = order_processor.place_order(customer2, [{"item": "Product C", "price": 15, "quantity": 3},
                                                       {"item": "Product D", "price": 25, "quantity": 2}])
-
+    
     # 주문 목록 확인
     print("List of Orders:")
     order_processor.list_orders()
