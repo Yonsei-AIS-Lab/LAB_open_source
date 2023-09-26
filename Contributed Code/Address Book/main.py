@@ -1,8 +1,17 @@
 from contacts import Contacts
+import signal # signal 모듈을 import
+import sys  # sys 모듈을 import
 
 def main():
     contacts = Contacts()
 
+    # Ctrl-C 처리 함수
+    def signal_handler(signal, frame):
+        print("\n프로그램을 종료합니다.")
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)  # Ctrl-C 누르면 signal_handler 함수 호출
+    
     while True:
         print("주소록 관리 프로그램")
         print("1. 전체 주소록 보기")
