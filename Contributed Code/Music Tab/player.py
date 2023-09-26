@@ -16,15 +16,16 @@ class Player:
 
     def update(self):
         # 플레이어 상태 업데이트
-        self.move()  # 예시: 플레이어 움직임 업데이트
+        self.move(800)  # 예시: 플레이어 움직임 업데이트
 
-    def move(self):
+    def move(self, screen_width):
         # 플레이어의 움직임 업데이트 로직을 추가
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] and self.x - self.radius > 0:
             self.x -= 5
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] and self.x + self.radius < screen_width:
             self.x += 5
+
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
