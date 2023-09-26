@@ -18,7 +18,10 @@ class Game:
 
         self.player = Player()
         self.obstacles = []
-        self.music = Music("./Original Code/Music Tab/background_music.mp3")
+        try:
+            self.music = Music("./Original Code/Music Tab/background_music.mp3")
+        except FileNotFoundError:
+            print("mp3 파일을 찾을 수 없습니다.")
 
     def run(self):
         self.music.play()
