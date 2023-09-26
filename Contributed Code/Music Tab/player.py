@@ -21,9 +21,9 @@ class Player:
     def move(self):
         # 플레이어의 움직임 업데이트 로직을 추가
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] and self.x - self.radius > 0:
             self.x -= 5
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] and self.x + self.radius < 800: # move 함수 내에서 플레이어가 화면 밖으로 나가지 않도록 처리
             self.x += 5
 
     def draw(self, screen):
