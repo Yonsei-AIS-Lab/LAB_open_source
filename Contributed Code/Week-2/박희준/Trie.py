@@ -1,8 +1,8 @@
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.is_end_of_word = False
-        self.frequency = 0
+        self.is_end_of_word = False # is_end_of_work 변수는 단어가 끝나는지 나타내기 위해 사용되는 변수
+        self.frequency = 0 # frequency 변수는 Trie에서 단어의 빈도를 세기 위한 변수
 
 class Trie:
     def __init__(self):
@@ -13,10 +13,12 @@ class Trie:
             return
         
         node = self.root
+        # Trie에 단어를 삽입하는 함수
         for char in word:
             if char not in node.children:
                 node.children[char] = TrieNode()
             node = node.children[char]
+        # 마지막 노드인 것을 표시하고 frequency를 증가하기
         node.is_end_of_word = True
         node.frequency += 1
 
@@ -25,6 +27,7 @@ class Trie:
             return False
         
         node = self.root
+        # Trie에서 단어를 찾는 함수
         for char in word:
             if char not in node.children:
                 return False
@@ -36,6 +39,7 @@ class Trie:
             return False
             
         node = self.root
+        # Trie가 prefix로 시작하는지 확인하는 함수
         for char in prefix:
             if char not in node.children:
                 return False
