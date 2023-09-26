@@ -40,9 +40,25 @@ class Game:
         self.player.update(self.monsters)
         for monster in self.monsters:
             monster.update()
+        
+        self.monsters = [monster for monster in self.monsters if monster.health > 0]  # 죽은 몬스터 제거
+        self.check_collisions_and_game_over() # 충돌 체크 및 게임 종료 조건 확인
 
         # 플레이어와 몬스터 간의 충돌 체크 및 게임 종료 조건 확인
 
+
+    def check_collisions_and_game_over(self):
+        # 플레이어와 몬스터 간의 충돌 체크 로직
+        for monster in self.monsters:
+            distance = ((self.player.x - monster.x) ** 2 + (self.player.y - monster.y) ** 2) ** 0.5
+            if distance < 30:
+                self.game_over()
+    
+    def game_over(self):
+        # 게임 종료 조건 확인 및 처리 로직
+        print("Game Over!")  # 간단하게 콘솔에 출력하는 예
+        pygame.quit()
+    
     def handle_events(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
