@@ -30,6 +30,12 @@ class Monster:
     def attack(self):
         return self.attack_damage
 
+    def take_damage(self, damage):
+        """
+        Monster 클래스한테도 take_damage() 함수를 추가했습니다.
+        """
+        self.health -= damage
+
 def main():
     player_name = input("플레이어 이름을 입력하세요: ")
     player = Player(player_name)
@@ -45,7 +51,10 @@ def main():
             print("게임을 종료합니다.")
             break
         elif command == "공격":
-            monster = random.choice(monsters)
+            choice = random.randrange(0, len(monsters))
+            print(choice) # 이거 이따가 지우기!
+            monster = monsters[choice]
+            #monster = random.choice(monsters)
             print(f"{player.name}님이 {monster.name}을(를) 공격합니다!")
             damage = player.attack()
             monster.take_damage(damage)
@@ -53,12 +62,27 @@ def main():
             if monster.health <= 0:
                 print(f"{monster.name}을(를) 처치하였습니다!")
                 player.inventory.append(f"{monster.name}의 아이템")
+                del monsters[choice] # 몬스터를 monsters에서 삭제하기 
+            else: # 아직 monster가 죽지 않았다면, monster가 공격할 차례
+                print(f"{monster.name}가 {player.name}님을 공격합니다!")
+                monster_damage = monster.attack()
+                player.take_damage(monster_damage)
+                print(f"{player.name}님에게 {monster_damage}의 데미지를 입혔습니다. 현재 체력: {player.health}")
+                
         elif command == "회복":
             player.heal()
             print(f"{player.name}님이 회복하였습니다. 현재 체력: {player.health}")
+        
+        if not monsters: # 모든 몬스터를 처치했을 경우, 자동으로 게임이 끝나게 코드를 추가했습니다.
+            print("모든 몬스터를 처치했습니다!")
+            break
 
     print("게임이 종료되었습니다.")
-    print(f"{player.name}님의 승리! 획득한 아이템: {', '.join(player.inventory)}")
+
+    if player.health > 0:
+        print(f"{player.name}님의 승리! 획득한 아이템: {', '.join(player.inventory)}")
+    else:
+        print(f"{player.name}님의 패배!")
 
 if __name__ == "__main__":
     main()
