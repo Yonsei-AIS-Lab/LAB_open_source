@@ -19,6 +19,9 @@ class Tower:
         else:
             self.target = None
 
+        if self.target and self.target.x == self.x and self.target.y == self.y:
+            self.target = None
+
     def attack(self):
         if self.target:
             self.target.take_damage(self.damage)
