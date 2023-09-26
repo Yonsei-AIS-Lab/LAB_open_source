@@ -1,0 +1,1 @@
+[{'name': 'π⁄»Ò¡ÿ', 'phone': '010-7', 'email': 'parkie0517@gmail.com'}, {'name': '»Ò¡ÿ', 'phone': '123', 'email': '§¿æ÷æﬁ'}]
