@@ -1,3 +1,5 @@
+from order import Order
+
 class OrderProcessor:
     def __init__(self):
         self.orders = []
