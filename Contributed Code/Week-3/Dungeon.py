@@ -22,10 +22,22 @@ class Player:
         self.health -= damage
 
 class Monster:
-    def __init__(self, name):
+    def __init__(self, name, difficulty):
         self.name = name
-        self.health = random.randint(50, 100)
-        self.attack_damage = random.randint(5, 15)
+
+        # 난이도에 따라 몬스터의 체력과 공격력이 달라지도록 설정하였습니다.
+        if difficulty == 1:
+            max_health = 75
+            max_damage = 15
+        elif difficulty == 2:
+            max_health = 100
+            max_damage = 20
+        else:
+            max_health = 125
+            max_damage = 25
+
+        self.health = random.randint(50, max_health)
+        self.attack_damage = random.randint(5, max_damage)
 
     def attack(self):
         return self.attack_damage
@@ -34,7 +46,10 @@ def main():
     player_name = input("플레이어 이름을 입력하세요: ")
     player = Player(player_name)
 
-    monsters = [Monster("고블린"), Monster("드래곤"), Monster("스켈레톤")]
+    print("게임 난이도를 설정을 위해 1부터 3사이의 숫자를 입력하세요. (1이 가장 쉬움)")
+    difficulty = int(input("난이도: "))
+
+    monsters = [Monster("고블린", difficulty), Monster("드래곤", difficulty), Monster("스켈레톤", difficulty)]
 
     print(f"{player.name}님, 던전 크롤러에 오신 것을 환영합니다!")
 
