@@ -5,25 +5,54 @@
 이 코드는 간단한 학습 및 이해를 위한 예시로 활용될 수 있으며, 실제 프로덕션 환경에서는 데이터베이스와 확장된 기능이 필요할 것입니다.
 """
 
+# 필요한 클래스를 import 합니다.
 from customer import Customer
-from order import Order
 from order_processor import OrderProcessor
 
+# 이 파이썬 스크립트가 메인으로 실행될 때만 아래의 코드를 실행합니다.
 if __name__ == "__main__":
-    # 고객 생성
-    customer1 = Customer(1, "Alice", "alice@example.com")
-    customer2 = Customer(2, "Bob", "bob@example.com")
+    # OrderProcessor 객체를 생성합니다.
+    order_processor=OrderProcessor()
 
-    # 주문 처리기 생성
-    order_processor = OrderProcessor()
+    # 무한 루프를 시작합니다. 사용자가 '3'을 입력하여 프로그램을 종료하기 전까지 계속됩니다.
+    while True:
+        print("1. 고객 추가 및 주문")
+        print("2. 주문 목록 보기")
+        print("3. 종료")
 
-    # 주문 생성
-    order1 = order_processor.place_order(customer1, [{"item": "Product A", "price": 20, "quantity": 2},
-                                                      {"item": "Product B", "price": 30, "quantity": 1}])
+        # 사용자로부터 선택사항을 입력받습니다.
+        choice=input("선택사항을 입력하세요:")
 
-    order2 = order_processor.place_order(customer2, [{"item": "Product C", "price": 15, "quantity": 3},
-                                                      {"item": "Product D", "price": 25, "quantity": 2}])
+        # 고객 추가 및 주문
+        if choice=='1':
+            id=input("고객 ID를 입력하세요:")
+            name=input("고객 이름을 입력하세요:")
+            email=input("고객 이메일을 입력하세요:")
+            new_customer=Customer(id,name,email)  # 새로운 Customer 객체 생성
 
-    # 주문 목록 확인
-    print("List of Orders:")
-    order_processor.list_orders()
+            order_items=[]  # 주문 항목 리스트 초기화
+            while True:
+                print("1.상품 추가")
+                print("2.주문 완료")
+                item_choice=input("선택사항을 입력하세요:")
+
+                if item_choice=='1':
+                    item_name=input("상품 이름을 입력하세요:")
+                    item_price=float(input("상품 가격을 입력하세요:"))
+                    quantity=int(input("주문 수량을 입력하세요:"))
+                    order_items.append({"item":item_name,"price":item_price,"quantity":quantity})  # 상품 정보 저장
+
+                elif item_choice=='2':
+                    break  # 상품 추가 루프 종료
+        
+            new_order=order_processor.place_order(new_customer,order_items)  # 새로운 Order 객체 생성 및 저장
+            
+        elif choice=='2':  # 모든 주문 목록 출력
+            print("주문 목록:")
+            order_processor.list_orders()
+            
+        elif choice=='3':  # 프로그램 종료
+            break
+
+        else:  # 잘못된 선택사항에 대한 처리
+	        print("잘못된 선택입니다!")
