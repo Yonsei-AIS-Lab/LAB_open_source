@@ -9,6 +9,7 @@ class Player:
         self.radius = 20
         self.color = (255, 0, 0)
         self.score = 0
+        self.speed = 15
 
     def tap(self):
         # 탭 이벤트 처리 및 점수 증가
@@ -22,9 +23,13 @@ class Player:
         # 플레이어의 움직임 업데이트 로직을 추가
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.x -= 5
+            self.x -= self.speed
+            if keys[pygame.K_SPACE]:
+                self.x -= self.speed
         if keys[pygame.K_RIGHT]:
-            self.x += 5
+            self.x += self.speed
+            if keys[pygame.K_SPACE]:
+                self.x += self.speed
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)

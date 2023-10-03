@@ -5,7 +5,8 @@ import os
 from player import Player
 from obstacle import Obstacle
 from music import Music
-import random  # random 모듈을 가져옴
+import random
+import librosa
 
 class Game:
     def __init__(self):
@@ -18,7 +19,15 @@ class Game:
 
         self.player = Player()
         self.obstacles = []
-        self.music = Music("./Original Code/Music Tab/background_music.mp3")
+        self.music = Music("./Contributed Code/Week-3/Music Tab Bilgee/background_music.wav")
+        self.beat_times = self.detect_beats()
+    
+    def detect_beats(self):
+        y, sr = librosa.load("./Contributed Code/Week-3/Music Tab Bilgee/background_music.wav")
+        onset_env = librosa.onset.onset_strength(y=y, sr= sr)
+        tempo, beat_frames = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
+        beat_times = librosa.frames_to_time(beat_frames, sr=sr)
+        return beat_times
 
     def run(self):
         self.music.play()
@@ -43,12 +52,12 @@ class Game:
             self.player.tap()
 
     def spawn_obstacles(self):
-        # 음악에 맞게 장애물 생성
-        # 예시로 무작위로 장애물을 생성합니다.
-        if random.randint(0, 100) < 5:  # 임의로 선택한 확률
-            x = random.randint(0, self.screen_width - 30)  # 화면 내 랜덤한 위치에 생성
-            speed = 5  # 장애물의 속도
+        current_time = pygame.time.get_ticks() / 1000 
+        if self.beat_times.any() and abs(current_time - self.beat_times[10]) < 0.05:
+            x = random.randint(0, self.screen_width - 30)
+            speed = 15
             self.obstacles.append(Obstacle(x, speed))
+            self.beat_times = self.beat_times[1:]
 
     def update(self):
         self.obstacles = [obstacle for obstacle in self.obstacles if not obstacle.collide(self.player)]
