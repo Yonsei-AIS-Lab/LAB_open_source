@@ -29,3 +29,7 @@ class VendingMachine:
 
     def check_balance(self):
         return f"잔액: {self.balance}원"
+    
+    def add_drink(self, product_name, product_price):
+        self.products[product_name] = product_price
+        print(f"{product_name}을/를 추가했습니다.")
