@@ -23,8 +23,8 @@ def main():
             vending_machine.insert_money(amount)
             print("금액이 투입되었습니다.")
         elif choice == '3':
-            product_name = input("구매할 음료수 이름을 입력하세요: ")
-            result = vending_machine.purchase(product_name)
+            product_number = int(input("구매할 음료수 번호를 입력하세요: "))
+            result = vending_machine.purchase(product_number)
             print(result)
         elif choice == '4':
             balance = vending_machine.check_balance()
