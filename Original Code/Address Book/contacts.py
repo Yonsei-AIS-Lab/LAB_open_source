@@ -12,6 +12,10 @@ class Contacts:
             print("주소록이 비어 있습니다.")
 
     def add_contact(self, name, phone, email):
+        if not name or not phone or not email:  # 어느 하나라도 비어 있으면
+            print("이름, 전화번호, 이메일중에 비어있는 곳이 있습니다.")
+            return
+
         contact = {"name": name, "phone": phone, "email": email}
         self.contacts.append(contact)
         save_contacts(self.contacts)
