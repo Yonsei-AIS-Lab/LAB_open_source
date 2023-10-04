@@ -9,6 +9,8 @@ class Constellations:
 
     def calculate_gravitational_force(self, star1, star2):
         G = 6.67430e-11  # 중력 상수 (m^3 kg^-1 s^-2)
+        if star1.position == star2.position:
+            return 0
         distance = math.sqrt(sum((x1 - x2)**2 for x1, x2 in zip(star1.position, star2.position)))
         force = (G * star1.mass * star2.mass) / (distance**2)
         return force
