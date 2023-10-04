@@ -25,17 +25,20 @@ class Blackjack:
     def calculate_hand_value(self, hand):
         value = 0
         num_aces = 0
+        
+        # 문자열 랭크를 정수 값으로 매핑
+        rank_values = {'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5, 'Six': 6, 
+                   'Seven': 7, 'Eight': 8, 'Nine': 9, 'Ten': 10, 
+                   'Jack': 10, 'Queen': 10, 'King': 10, 'Ace': 11}
+    
         for card in hand:
             rank = card.split()[0]
-            if rank in ['Jack', 'Queen', 'King']:
-                value += 10
-            elif rank == 'Ace':
-                value += 11
+            value += rank_values[rank] # 딕셔너리를 사용하여 값을 가져옴
+            
+            if rank == 'Ace':
                 num_aces += 1
-            else:
-                value += int(rank)
 
-        while value > 21 and num_aces > 0:
+        while value > 21 and num_aces:
             value -= 10
             num_aces -= 1
 
