@@ -14,7 +14,7 @@ def main():
 
     for _ in range(24 * 365):  # 1년 동안의 시뮬레이션
         constellation.update_positions(time_step)
-        print(earth)
+        print(sun)
 
 if __name__ == "__main__":
     main()
