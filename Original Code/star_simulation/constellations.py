@@ -5,6 +5,8 @@ class Constellations:
         self.stars = []
 
     def add_star(self, star):
+        if not isinstance(star, Star):
+            raise ValueError("star 파라미터가 부족합니다.")
         self.stars.append(star)
 
     def calculate_gravitational_force(self, star1, star2):
