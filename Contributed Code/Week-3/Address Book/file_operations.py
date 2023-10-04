@@ -1,8 +1,8 @@
-CONTACTS_FILE = "contacts.txt"
+CONTACTS_FILE = "./contacts.txt"
 
 def read_contacts():
     try:
-        with open(CONTACTS_FILE, "r") as file:
+        with open(CONTACTS_FILE, "r", encoding='cp949') as file:
             return eval(file.read())
     except FileNotFoundError:
         return []
