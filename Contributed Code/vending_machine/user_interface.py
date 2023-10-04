@@ -19,7 +19,13 @@ def main():
         if choice == '1':
             vending_machine.display_products()
         elif choice == '2':
-            amount = int(input("투입할 금액을 입력하세요: "))
+            # 양수 금액만 넣을 수 있도록 코드를 수정하였음.
+            while True:
+                amount = int(input("투입할 금액을 입력하세요: "))
+                if amount > 0:
+                    break
+                else:
+                    print("옳바른 돈을 투입하지 않았습니다.")
             vending_machine.insert_money(amount)
             print("금액이 투입되었습니다.")
         elif choice == '3':
