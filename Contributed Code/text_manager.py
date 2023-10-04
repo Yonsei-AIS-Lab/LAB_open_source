@@ -14,8 +14,12 @@ class TextFileManager:
             print(f"파일 생성 중 오류 발생: {str(e)}")
 
     def set_current_file(self, filename):
-        self.current_file = filename
-        print(f"현재 작업 중인 파일: {filename}")
+        file_path = os.path.join(self.current_directory, filename)
+        if os.path.exists(file_path):
+            self.current_file = filename
+            print(f"현재 작업 중인 파일: {filename}")
+        else:
+            print(f"파일 '{filename}'이(가) 존재하지 않습니다. 먼저 파일을 생성하세요.")
 
     def write_to_file(self, content):
         if self.current_file:
