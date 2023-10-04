@@ -45,6 +45,17 @@ class TextFileManager:
         else:
             print("작업 중인 파일이 없습니다. 먼저 파일을 선택하세요.")
 
+    def delete_file(self):
+        if self.current_file:
+            try:
+                os.remove(os.path.join(self.current_directory, self.current_file))
+                print(f"{self.current_file} 파일을 삭제하였습니다.")
+                self.current_file = None
+            except Exception as e:
+                print(f"파일 삭제 중 오류 발생: {str(e)}")
+        else:
+            print("작업 중인 파일이 없습니다. 먼저 파일을 선택하세요.")
+
 def main():
     file_manager = TextFileManager()
     
@@ -54,7 +65,8 @@ def main():
         print("2. 현재 파일 선택")
         print("3. 파일에 내용 추가")
         print("4. 파일에서 검색")
-        print("5. 종료")
+        print("5. 파일 삭제")
+        print("6. 종료")
 
         choice = input("선택: ")
 
@@ -71,6 +83,10 @@ def main():
             keyword = input("검색할 키워드를 입력하세요: ")
             file_manager.search_file(keyword)
         elif choice == "5":
+            keyword = input("검색할 키워드를 입력하세요: ")
+            file_manager.delete_file(keyword)
+
+        elif choice == "6":
             print("프로그램을 종료합니다.")
             break
         else:
