@@ -44,10 +44,13 @@ class Blackjack:
 
         return value
 
-    def display_game_status(self):
+    def display_game_status(self, reveal_dealer=False):
         print("\n--- 블랙잭 게임 ---")
         print("플레이어의 카드:", self.player_hand)
-        print("딜러의 첫 번째 카드:", [self.dealer_hand[0], "???"])
+        if reveal_dealer:
+            print("딜러의 카드:", self.dealer_hand)
+        else:
+            print("딜러의 첫 번째 카드:", [self.dealer_hand[0], "???"])
 
     def play(self):
         self.player_hand.clear()
@@ -71,7 +74,7 @@ class Blackjack:
                 while self.calculate_hand_value(self.dealer_hand) < 17:
                     self.deal_card(self.dealer_hand)
 
-                self.display_game_status()
+                self.display_game_status(reveal_dealer=True)
 
                 player_value = self.calculate_hand_value(self.player_hand)
                 dealer_value = self.calculate_hand_value(self.dealer_hand)
