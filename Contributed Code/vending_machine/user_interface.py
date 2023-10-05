@@ -9,10 +9,11 @@ def main():
         print("2. 금액 투입")
         print("3. 음료수 구매")
         print("4. 잔액 확인")
-        print("5. 종료")
+        print("5. 거스름돈 반환")
+        print("6. 종료")
         choice = input("작업을 선택하세요: ")
 
-        if choice == '5':
+        if choice == '6':
             print("프로그램을 종료합니다.")
             break
 
@@ -29,6 +30,9 @@ def main():
         elif choice == '4':
             balance = vending_machine.check_balance()
             print(balance)
+        elif choice == '5':
+            change = vending_machine.return_change()
+            print(f"거스름돈: {change}이 반환 되었습니다.")
         else:
             print("올바른 선택이 아닙니다. 다시 시도하세요.")
 
