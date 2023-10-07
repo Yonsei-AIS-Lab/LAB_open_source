@@ -2,8 +2,9 @@ class ToDoList:
     def __init__(self):
         self.tasks = []
 
-    def add_task(self, task):
-        self.tasks.append(task)
+    def add_task(self, task, date):
+        
+        self.tasks.append(f"{date}: {task}")
 
     def remove_task(self, task):
         if task in self.tasks:
@@ -36,7 +37,8 @@ def main():
 
         if choice == "1":
             task = input("추가할 할 일을 입력하세요: ")
-            to_do_list.add_task(task)
+            date = input("할일의 날짜를 입력하세요: ")
+            to_do_list.add_task(task, date)
         elif choice == "2":
             task = input("삭제할 할 일을 입력하세요: ")
             to_do_list.remove_task(task)
