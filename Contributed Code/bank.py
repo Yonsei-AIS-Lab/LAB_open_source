@@ -36,7 +36,8 @@ def main():
         print("2. 입금")
         print("3. 출금")
         print("4. 계좌 조회")
-        print("5. 종료")
+        print("5. 전체 계좌 정보 출력")
+        print("6. 종료")
 
         choice = input("선택: ")
 
@@ -73,6 +74,9 @@ def main():
             else:
                 print("계좌를 찾을 수 없습니다.")
         elif choice == '5':
+            for account in accounts:
+                print(account)
+        elif choice == '6':
             print("프로그램을 종료합니다.")
             break
         else:
