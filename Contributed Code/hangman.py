@@ -2,10 +2,11 @@ import random
 
 class HangmanGame:
     def __init__(self):
-        self.words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
+        self.words = ["apple", "banana", "cherry", "elderberry", "orange", "grape"]
         self.secret_word = random.choice(self.words)
         self.guesses_left = 6
         self.guessed_letters = []
+        self.hint = "과일"
 
     def display_word(self):
         display = ""
@@ -15,12 +16,17 @@ class HangmanGame:
             else:
                 display += "_"
         return display
+    
+    def display_hint(self):
+        return f"힌트: {self.hint}"
 
     def play(self):
         print("행맨 게임에 오신 것을 환영합니다!")
         print("맞춰야 할 단어를 생각하고 시작합니다.")
 
         while self.guesses_left > 0:
+            if self.guesses_left == 3:
+                print(self.display_hint())
             print(f"\n현재 단어: {self.display_word()}")
             guess = input("알파벳 하나를 추측하세요: ").lower()
 
