@@ -43,9 +43,14 @@ def main():
         if choice == '1':
             account_number = input("계좌번호: ")
             owner = input("소유자 이름: ")
-            account = BankAccount(account_number, owner)
-            accounts.append(account)
-            print("계좌가 생성되었습니다.")
+            for account in accounts:
+                if account.account_number == account_number:
+                    print("다른 계좌번호를 사용하세요.")
+                    break
+            else:
+                account = BankAccount(account_number, owner)
+                accounts.append(account)
+                print("계좌가 생성되었습니다.")
         elif choice == '2':
             account_number = input("입금할 계좌번호: ")
             amount = float(input("입금할 금액: "))
