@@ -10,6 +10,7 @@ def main():
         print("3. 음료수 구매")
         print("4. 잔액 확인")
         print("5. 종료")
+        print("6. 음료수 추가 (관리자 모드)")
         choice = input("작업을 선택하세요: ")
 
         if choice == '5':
@@ -35,6 +36,11 @@ def main():
         elif choice == '4':
             balance = vending_machine.check_balance()
             print(balance)
+        elif choice == '6':
+            # 음료수를 추가할 수 있는 관리자 모드
+            product_name = input("추가할 음료수 이름을 입력하세요: ")
+            product_price = input("추가할 음료수 금액을 입력하세요: ")
+            vending_machine.add_drink(product_name, product_price)
         else:
             print("올바른 선택이 아닙니다. 다시 시도하세요.")
 
