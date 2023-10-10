@@ -3,6 +3,8 @@
 ## 설명
 이 레포지터리는 2023년 2학기에 진행되는 오픈소스SW응용과제의 GitHub Contribution 실습을 위해 만들어진 저장소입니다.
 
+This repository was created for GitHub Contribution practice for the open source SW application project that will be held in the second semester of 2023.
+
 ## 컨셉
 이 레포지토리는 강의 내용에 따라 오픈소스 프로젝트 기여와 협업을 경험하고 실습하기 위한 공간입니다. 학생들은 Original Code 폴더에 있는 정상 작동이 되지 않거나 최적화가 되지 않은 코드를 개선하거나 수정하여 Contributed Code 폴더에 제출하게 됩니다.
 
