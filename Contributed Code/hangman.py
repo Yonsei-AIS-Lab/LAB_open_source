@@ -2,7 +2,7 @@ import random
 
 class HangmanGame:
     def __init__(self):
-        self.words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
+        self.words = ["apple", "banana", "cherry", "elderberry", "grape", "orange"]
         self.secret_word = random.choice(self.words)
         self.guesses_left = 6
         self.guessed_letters = []
