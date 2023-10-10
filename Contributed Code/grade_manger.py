@@ -61,9 +61,16 @@ def main():
         choice = input("선택: ")
 
         if choice == '1':
-            student_id = input("학번: ")
-            name = input("이름: ")
-            score = int(input("성적: "))
+            try:
+                student_id = int(input("학번: "))
+                name = input("이름: ")
+                score = int(input("성적: "))
+            except ValueError:
+                print('숫자로 입력해주세요.')
+                continue
+            if (score < 0) or (score > 100):
+                print('성적의 범위는 0 ~ 100 사이 입니다.')
+                continue
             student = Student(student_id, name, score)
             student_manager.add_student(student)
         elif choice == '2':
