@@ -6,6 +6,7 @@ class HangmanGame:
         self.secret_word = random.choice(self.words)
         self.guesses_left = 6
         self.guessed_letters = []
+        self.guessed_wrong = [] # 지금까지 틀린 알파벳을 저장하는 리스트
 
     def display_word(self):
         display = ""
@@ -22,6 +23,7 @@ class HangmanGame:
 
         while self.guesses_left > 0:
             print(f"\n현재 단어: {self.display_word()}")
+            print(f"지금까지 예측한 알파벳 중에 틀린 것들: {self.guessed_wrong}") # 틀린 알파벳을 출력해줌
             guess = input("알파벳 하나를 추측하세요: ").lower()
 
             if len(guess) != 1 or not guess.isalpha():
@@ -40,6 +42,7 @@ class HangmanGame:
                     print(f"축하합니다! 정답을 맞추었습니다. 단어는 '{self.secret_word}'입니다!")
                     break
             else:
+                self.guessed_wrong.append(guess) # 틀린 알파벳을 append하기
                 self.guesses_left -= 1
                 print(f"틀렸습니다. {self.guesses_left}번의 시도 기회가 남았습니다.")
 
