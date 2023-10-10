@@ -26,6 +26,9 @@ w.addch(int(food[0]), int(food[1]), curses.ACS_PI)
 # 방향 설정
 key = curses.KEY_RIGHT
 
+# 점수 설정
+score = 0
+
 # 게임 루프
 while True:
     next_key = w.getch()
@@ -55,6 +58,7 @@ while True:
     # 먹이 먹기
     if snake[0] == food:
         food = None
+        score += 1 # 점수 증가
         while food is None:
             nf = [
                 random.randint(1, sh - 1),
@@ -68,3 +72,6 @@ while True:
 
     snake.insert(0, new_head)
     w.addch(int(snake[0][0]), int(snake[0][1]), curses.ACS_CKBOARD)
+
+    # 점수 표시
+    w.addstr(0, 0, f'Score: {score}')
