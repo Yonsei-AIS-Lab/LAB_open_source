@@ -35,3 +35,34 @@ class VendingMachine:
     def add_drink(self, product_name, product_price):
         self.products[product_name] = product_price
         print(f"{product_name}을/를 추가했습니다.")
+        
+    def return_change(self):
+        change = self.balance
+        change_str = "거스름돈: "
+        
+        num_1000 = change // 1000
+        if num_1000 > 0:
+            change_str += f"1000원 {num_1000}개, "
+            change %= 1000
+        
+        num_500 = change // 500
+        if num_500 > 0:
+            change_str += f"500원 {num_500}개, "
+            change %= 500
+        
+        num_100 = change // 100
+        if num_100 > 0:
+            change_str += f"100원 {num_100}개, "
+            change %= 100
+        
+        num_50 = change // 50
+        if num_50 > 0:
+            change_str += f"50원 {num_50}개, "
+            change %= 50
+        
+        num_10 = change // 10
+        if num_10 > 0:
+            change_str += f"10원 {num_10}개"
+        
+        self.balance = 0  # 잔액 초기화
+        return change_str
