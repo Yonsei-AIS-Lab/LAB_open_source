@@ -63,7 +63,11 @@ def main():
         if choice == '1':
             student_id = input("학번: ")
             name = input("이름: ")
-            score = int(input("성적: "))
+            try:
+                score = int(input("성적: "))
+            except ValueError: # int 값 이외에 다른 값을 입력할 경우, 에러 핸들링
+                print("올바른 성적을 입력하세요.")
+                continue  # 다시 반복문으로 돌아가게 함
             student = Student(student_id, name, score)
             student_manager.add_student(student)
         elif choice == '2':
