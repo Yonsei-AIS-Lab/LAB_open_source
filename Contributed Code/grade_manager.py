@@ -61,27 +61,53 @@ def main():
         choice = input("선택: ")
 
         if choice == '1':
-            student_id = input("학번: ")
-            name = input("이름: ")
-            score = int(input("성적: "))
+            try:
+                student_id = int(input("학번: "))
+                name = input("이름: ")
+                score = int(input("성적: "))
+            except ValueError:
+                print('숫자로 입력해주세요.')
+                continue
+            if (score < 0) or (score > 100):
+                print('성적의 범위는 0 ~ 100 사이 입니다.')
+                continue
             student = Student(student_id, name, score)
             student_manager.add_student(student)
         elif choice == '2':
-            student_id = input("검색할 학번: ")
+            try:
+                student_id = int(input("검색할 학번: "))
+            except ValueError:
+                print('숫자로 입력해주세요.')
+                continue
             student = student_manager.search_student(student_id)
             if student:
                 print(f"학번: {student.student_id}, 이름: {student.name}, 성적: {student.score}")
             else:
                 print("학생을 찾을 수 없습니다.")
         elif choice == '3':
-            student_id = input("성적을 수정할 학생의 학번: ")
-            new_score = int(input("새로운 성적: "))
+            try:
+                student_id = int(input("성적을 평가할 학생의 학번: "))
+                new_score = int(input("새로운 성적: "))
+            except ValueError:
+                print('숫자로 입력해주세요.')
+                continue
+            if (new_score < 0) or (new_score > 100):
+                print('성적의 범위는 0 ~ 100 사이 입니다.')
+                continue
             student_manager.update_student(student_id, new_score)
         elif choice == '4':
-            student_id = input("삭제할 학생의 학번: ")
+            try:
+                student_id = int(input("삭제할 학생의 학번: "))
+            except ValueError:
+                print('숫자로 입력해주세요.')
+                continue
             student_manager.delete_student(student_id)
         elif choice == '5':
-            student_id = input("성적을 평가할 학생의 학번: ")
+            try:
+                student_id = int(input("성적을 평가할 학생의 학번: "))
+            except ValueError:
+                print('숫자로 입력해주세요.')
+                continue
             evaluation = student_manager.evaluate_student(student_id)
             if evaluation:
                 print(f"학생의 성적 평가: {evaluation}")
