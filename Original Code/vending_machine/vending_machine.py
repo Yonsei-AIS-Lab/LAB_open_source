@@ -10,14 +10,16 @@ class VendingMachine:
 
     def display_products(self):
         print("음료수 목록:")
-        for product, price in self.products.items():
-            print(f"{product}: {price}원")
+        for i, (product, price) in enumerate(self.products.items()):
+            print(f"{i + 1}. {product}: {price}원")
 
     def insert_money(self, amount):
         self.balance += amount
 
-    def purchase(self, product_name):
-        if product_name in self.products:
+    def purchase(self, product_number):
+        product_names = list(self.products.keys())
+        if 1 <= product_number <= len(product_names):
+            product_name = product_names[product_number - 1]
             price = self.products[product_name]
             if self.balance >= price:
                 self.balance -= price
