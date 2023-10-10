@@ -8,6 +8,8 @@ class ToDoList:
     def remove_task(self, task):
         if task in self.tasks:
             self.tasks.remove(task)
+        else:
+            print("입력하신 번호의 할 일이 없습니다.")
 
     def view_tasks(self):
         if not self.tasks:
@@ -20,6 +22,8 @@ class ToDoList:
     def edit_task(self, task_index, new_task):
         if task_index >= 1 and task_index <= len(self.tasks):
             self.tasks[task_index - 1] = new_task
+        else:
+            print("입력하신 번호의 할 일이 없습니다.")
 
 def main():
     to_do_list = ToDoList()
