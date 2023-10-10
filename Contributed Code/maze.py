@@ -18,13 +18,19 @@ class MazeGame:
         self.player_x = 1
         self.player_y = 1
         self.goal_x = 6
-        self.goal_y = 6
+        self.goal_y = 2 # 화면에 표시된 미로의 좌표와 실제 미로의 좌표가 달라서 화면에 표시된 좌표를 기준으로 수정함
 
     def display_maze(self):
         os.system("clear" if sys.platform == "linux" else "cls")  # 화면 지우기
 
-        for row in self.maze:
-            print(row)
+        for i, row in enumerate(self.maze):
+            display_row = ""
+            for j, col in enumerate(row):
+                if i == self.player_x and j == self.player_y:
+                    display_row += "P"
+                else:
+                    display_row += col
+            print(display_row)
 
     def move(self, direction):
         new_x = self.player_x
