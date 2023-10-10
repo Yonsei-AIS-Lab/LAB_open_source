@@ -1,3 +1,4 @@
+import re
 class BankAccount:
     def __init__(self, account_number, owner, balance=0.0):
         self.account_number = account_number
@@ -28,6 +29,8 @@ class BankAccount:
         return f"계좌번호: {self.account_number}, 소유자: {self.owner}, 잔액: {self.balance} 원"
 
 def main():
+    pattern = re.compile(r'[^0-9\s-]')
+    pattern2 = re.compile(r'[^0-9]')
     accounts = []
 
     while True:
@@ -41,9 +44,15 @@ def main():
         choice = input("선택: ")
 
         if choice == '1':
-            account_number = input("계좌번호: ")
+            str_number = input("계좌번호: ")
+            if pattern.search(str_number) is not None:
+                print("잘못된 계좌번호 입니다.")
+                continue
+            else:
+                account_number = pattern2.sub('', str_number)
             owner = input("소유자 이름: ")
             account = BankAccount(account_number, owner)
+            print(account)
             accounts.append(account)
             print("계좌가 생성되었습니다.")
         elif choice == '2':
@@ -65,7 +74,12 @@ def main():
             else:
                 print("계좌를 찾을 수 없습니다.")
         elif choice == '4':
-            account_number = input("조회할 계좌번호: ")
+            str_number = input("조회할 계좌번호: ")
+            if pattern.search(str_number) is not None:
+                print("잘못된 계좌번호 입니다.")
+                continue
+            else:
+                account_number = pattern2.sub('', str_number)
             for account in accounts:
                 if account.account_number == account_number:
                     print(account)
