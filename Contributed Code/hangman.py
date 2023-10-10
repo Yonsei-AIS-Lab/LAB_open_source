@@ -47,8 +47,15 @@ class HangmanGame:
             print(f"게임 종료. 시도 기회가 모두 소진되었습니다. 정답은 '{self.secret_word}'입니다.")
 
 def main():
-    game = HangmanGame()
-    game.play()
+    while True: # 게임을 반복할 수 있도록 무한 루프 사용
+        game = HangmanGame()
+        game.play()
+        
+        #게임이 끝난 후 게임 재시작 여부 확인
+        play_again = input("다시 게임을 하시겠습니까? (y/n): ").lower()
+        if play_again != "y":
+            print("게임을 종료합니다.")
+            break # 사용자가  y가 아닌 다른 값을 입력하면 무한 루프 종료
 
 if __name__ == "__main__":
     main()
