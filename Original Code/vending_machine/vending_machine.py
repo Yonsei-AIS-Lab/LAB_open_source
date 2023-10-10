@@ -1,33 +1,35 @@
 class VendingMachine:
     def __init__(self):
         self.products = {
-            '콜라': 1500,
-            '사이다': 1200,
-            '오렌지 주스': 1800,
-            '물': 1000,
+            '콜라': [1500,5],
+            '사이다': [1200,5],
+            '오렌지 주스': [1800,5],
+            '물': [1000,5],
         }
         self.balance = 0
 
     def display_products(self):
-        print("음료수 목록:")
-        for i, (product, price) in enumerate(self.products.items()):
-            print(f"{i + 1}. {product}: {price}원")
+        print("<음료수>")
+        for product, info in self.products.items():
+            if info[1] == 0:
+                print(f"{product}: {info[0]}원 -품절-")
+            else:        
+                print(f"{product}: {info[0]}원")
 
     def insert_money(self, amount):
         self.balance += amount
 
-    def purchase(self, product_number):
-        product_names = list(self.products.keys())
-        if 1 <= product_number <= len(product_names):
-            product_name = product_names[product_number - 1]
-            price = self.products[product_name]
-            if self.balance >= price:
-                self.balance -= price
+    def purchase(self, product_name):
+        if (product_name in self.products) and (self.products[product_name][1] > 0):
+            info = self.products[product_name]
+            if self.balance >= info[0]:
+                self.balance -= info[0]
+                info[1] -= 1
                 return f"{product_name}을 구매했습니다."
             else:
                 return "잔액이 부족합니다."
         else:
-            return "해당 제품은 판매하지 않습니다."
+            return "해당 제품은 판매하지 않거나 품절입니다."
 
     def check_balance(self):
         return f"잔액: {self.balance}원"
@@ -65,4 +67,4 @@ class VendingMachine:
             change_str += f"10원 {num_10}개"
         
         self.balance = 0  # 잔액 초기화
-        return change_str
+        return f"\n잔액: {self.balance}원"
