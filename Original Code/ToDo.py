@@ -5,9 +5,12 @@ class ToDoList:
     def add_task(self, task):
         self.tasks.append(task)
 
-    def remove_task(self, task):
-        if task in self.tasks:
-            self.tasks.remove(task)
+    def remove_task(self, task_index):
+        if task_index >=1 and task_index <= len(self.tasks):
+            remove_task = self.tasks.pop(task_index - 1)
+            print(f"{remove_task}가 할 일 목록에서 삭제되었습니다.")
+        else:
+            print("잘못된 번호입니다. 다시 시도하세요.")
 
     def view_tasks(self):
         if not self.tasks:
@@ -38,8 +41,12 @@ def main():
             task = input("추가할 할 일을 입력하세요: ")
             to_do_list.add_task(task)
         elif choice == "2":
-            task = input("삭제할 할 일을 입력하세요: ")
-            to_do_list.remove_task(task)
+            to_do_list.view_tasks()
+            try:
+                task_index = int(input("삭제할 할 일의 번호를 입력하세요: "))
+                to_do_list.remove_task(task_index)
+            except ValueError:
+                print("잘못된 입력입니다. 숫자를 입력하세요.")
         elif choice == "3":
             to_do_list.view_tasks()
         elif choice == "4":
