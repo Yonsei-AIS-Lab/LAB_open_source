@@ -20,6 +20,19 @@ class ToDoList:
     def edit_task(self, task_index, new_task):
         if task_index >= 1 and task_index <= len(self.tasks):
             self.tasks[task_index - 1] = new_task
+    
+    def revise_task(self): # 함수 추가
+        if not self.tasks:
+            print("할 일이 없습니다.")
+        else:
+            print("할 일 목록:")
+            for idx, task in enumerate(self.tasks, start=1):
+                print(f"{idx}. {task}")
+            task_index = int(input("수정할 할 일의 번호를 입력하세요: "))
+            new_task = input("새로운 할 일을 입력하세요: ")
+            self.edit_task(task_index, new_task)
+        
+        
 
 def main():
     to_do_list = ToDoList()
@@ -43,9 +56,7 @@ def main():
         elif choice == "3":
             to_do_list.view_tasks()
         elif choice == "4":
-            task_index = int(input("수정할 할 일의 번호를 입력하세요: "))
-            new_task = input("새로운 할 일을 입력하세요: ")
-            to_do_list.edit_task(task_index, new_task)
+            to_do_list.revise_task() # 함수 추가
         elif choice == "5":
             print("애플리케이션을 종료합니다.")
             break
