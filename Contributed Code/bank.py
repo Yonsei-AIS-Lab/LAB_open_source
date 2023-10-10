@@ -47,10 +47,11 @@ def main():
             accounts.append(account)
             print("계좌가 생성되었습니다.")
         elif choice == '2':
-            account_number = input("입금할 계좌번호: ")
+            # 예금주의 이름을 사용하여 입금을 할 수 있도록 코드를 수정함
+            account_number_name = input("입금할 계좌번호 또는 이름: ")
             amount = float(input("입금할 금액: "))
             for account in accounts:
-                if account.account_number == account_number:
+                if account.account_number == account_number_name or account.owner == account_number_name:
                     account.deposit(amount)
                     break
             else:
