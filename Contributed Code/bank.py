@@ -27,6 +27,12 @@ class BankAccount:
     def __str__(self):
         return f"계좌번호: {self.account_number}, 소유자: {self.owner}, 잔액: {self.balance} 원"
 
+    def find_account(accounts, account_number):
+        for account in accounts:
+            if account.account_number == account_number:
+                return account
+        return None
+
 def main():
     accounts = []
 
@@ -43,9 +49,13 @@ def main():
         if choice == '1':
             account_number = input("계좌번호: ")
             owner = input("소유자 이름: ")
-            account = BankAccount(account_number, owner)
-            accounts.append(account)
-            print("계좌가 생성되었습니다.")
+            existing_account = account.find_account(accounts, account_number)
+            if existing_account:
+                print("이미 존재하는 계좌입니다.")
+            else:
+                account = BankAccount(account_number, owner)
+                accounts.append(account)
+                print("계좌가 생성되었습니다.")
         elif choice == '2':
             account_number = input("입금할 계좌번호: ")
             amount = float(input("입금할 금액: "))
