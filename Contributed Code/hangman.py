@@ -4,7 +4,7 @@ class HangmanGame:
     def __init__(self):
         self.words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
         self.secret_word = random.choice(self.words)
-        self.guesses_left = 6
+        self.guesses_left = len(self.secret_word) + 2 # 게임의 난이도를 위해 단어 길이에 비례하는 guesses_left를 설정함.
         self.guessed_letters = []
 
     def display_word(self):
@@ -19,6 +19,7 @@ class HangmanGame:
     def play(self):
         print("행맨 게임에 오신 것을 환영합니다!")
         print("맞춰야 할 단어를 생각하고 시작합니다.")
+        print(f"총 {self.guesses_left}번의 기회가 있습니다.") # 게임이 시작할 때 남은 기회를 알려줌
 
         while self.guesses_left > 0:
             print(f"\n현재 단어: {self.display_word()}")
