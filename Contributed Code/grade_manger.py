@@ -26,6 +26,14 @@ class StudentManager:
         else:
             print("학생을 찾을 수 없습니다.")
 
+    def update_student_name(self, student_id, new_name):
+        student = self.search_student(student_id)
+        if student:
+            student.name = new_name
+            print(f"학생의 이름이 {student.name} 으로 업데이트되었습니다.")
+        else:
+            print("학생을 찾을 수 없습니다.")
+
     def delete_student(self, student_id):
         student = self.search_student(student_id)
         if student:
@@ -75,8 +83,23 @@ def main():
                 print("학생을 찾을 수 없습니다.")
         elif choice == '3':
             student_id = input("성적을 수정할 학생의 학번: ")
-            new_score = int(input("새로운 성적: "))
-            student_manager.update_student(student_id, new_score)
+            print("수정하려는 항목을 선택해주세요.")
+            print("1. 학생 이름 정보")
+            print("2. 학생 성적 정보")
+            choice_update = input("선택: ")
+            
+            if choice_update == '1':
+                new_name = input("새로운 이름: ")
+                student_manager.update_student_name(student_id, new_name)
+            elif choice_update == '2':
+                try:
+                    new_score = int(input("새로운 성적: "))
+                    student_manager.update_student(student_id, new_score)
+                except ValueError:
+                    print("올바른 숫자로 성적을 입력해주세요.")
+            else:
+                print("올바른 옵션을 선택하세요.")
+
         elif choice == '4':
             student_id = input("삭제할 학생의 학번: ")
             student_manager.delete_student(student_id)
