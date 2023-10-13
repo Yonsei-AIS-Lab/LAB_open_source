@@ -21,6 +21,46 @@ class HangmanGame:
         print("맞춰야 할 단어를 생각하고 시작합니다.")
 
         while self.guesses_left > 0:
+            if self.guesses_left == 5:
+                print("   +---+")
+                print("       |")
+                print("       |")
+                print("       |")
+                print("       |")
+                print("       |")
+                print("==========")
+            elif self.guesses_left == 4:
+                print("   +---+")
+                print("   |   |")
+                print("       |")
+                print("       |")
+                print("       |")
+                print("       |")
+                print("==========")
+            elif self.guesses_left == 3:
+                print("   +---+")
+                print("   |   |")
+                print("   o   |")
+                print("       |")
+                print("       |")
+                print("       |")
+                print("==========")
+            elif self.guesses_left == 2:
+                print("   +---+")
+                print("   |   |")
+                print("   o   |")
+                print("   |   |")
+                print("       |")
+                print("       |")
+                print("==========")
+            elif self.guesses_left == 1:
+                print("   +---+")
+                print("   |   |")
+                print("   o   |")
+                print("  /|\  |")
+                print("       |")
+                print("       |")
+                print("==========")
             print(f"\n현재 단어: {self.display_word()}")
             guess = input("알파벳 하나를 추측하세요: ").lower()
 
@@ -44,6 +84,13 @@ class HangmanGame:
                 print(f"틀렸습니다. {self.guesses_left}번의 시도 기회가 남았습니다.")
 
         if self.guesses_left == 0:
+            print("   +---+")
+            print("   |   |")
+            print("   o   |")
+            print("  /|\  |")
+            print("  / \  |")
+            print("       |")
+            print("==========")
             print(f"게임 종료. 시도 기회가 모두 소진되었습니다. 정답은 '{self.secret_word}'입니다.")
 
 def main():
@@ -52,3 +99,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
