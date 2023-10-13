@@ -55,6 +55,7 @@ while True:
     # 먹이 먹기
     if snake[0] == food:
         food = None
+        w.timeout(random.randint(20, 100))
         while food is None:
             nf = [
                 random.randint(1, sh - 1),
