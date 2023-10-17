@@ -15,10 +15,21 @@ class Team:
         return sum(player.skill for player in self.players)
 
 def simulate_game(team1, team2):
-    team1_score = random.randint(0, 5)
-    team2_score = random.randint(0, 5)
+    # 각 팀의 skill의 합의 바탕으로 게임의 승패를 결정하는 코드를 추가함.
+    sum_team1_skill = random.randint(0, team1.calculate_team_skill())
+    sum_team2_skill = random.randint(0, team2.calculate_team_skill())
+    if (sum_team1_skill > sum_team2_skill): # 팀1의 skill 합이 더 높은 경우
+        team1_score = random.randint(1, 6)
+        team2_score = random.randint(0, 3)
+    elif (sum_team1_skill < sum_team2_skill): # 팀2의 skill 합이 더 높은 경우
+        team1_score = random.randint(0, 3)
+        team2_score = random.randint(1, 6)
+    else: # 두 팀의 skill 합이 같은 경우
+        team1_score = random.randint(0, 4)
+        team2_score = random.randint(0, 4)
     team1.score += team1_score
     team2.score += team2_score
+
     return f"{team1.name} {team1_score} - {team2.name} {team2_score}"
 
 def print_scoreboard(team1, team2):
