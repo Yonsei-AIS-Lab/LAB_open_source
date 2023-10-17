@@ -27,6 +27,11 @@ class Team:
         for player in self.players:
             player.train()
         print(f"{self.name} 팀의 선수들이 훈련을 받았습니다.")
+    
+    @classmethod    
+    def create_team(cls):
+        name = input("팀 이름: ")
+        return cls(name)    
 
 # 명령행 인터페이스 (CLI)
 def main():
@@ -39,8 +44,9 @@ def main():
         print("1. 선수 추가")
         print("2. 코치 추가")
         print("3. 코치가 선수 팀에 배치")
-        print("4. 팀 훈련")
-        print("5. 종료")
+        print("4. 팀 추가")
+        print("5. 팀 훈련")
+        print("6. 종료")
 
         choice = input("원하는 작업을 선택하세요: ")
 
@@ -71,6 +77,11 @@ def main():
                 print("코치, 선수 또는 팀을 찾을 수 없습니다.")
 
         elif choice == '4':
+            team = Team.create_team()
+            teams[team.name] = team
+            print(f"{team.name} 팀이 추가되었습니다.")
+
+        elif choice == '5':
             team_name = input("팀 이름: ")
             if team_name in teams:
                 team = teams[team_name]
@@ -78,7 +89,7 @@ def main():
             else:
                 print("팀을 찾을 수 없습니다.")
 
-        elif choice == '5':
+        elif choice == '6':
             break
 
         else:
