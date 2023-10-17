@@ -57,6 +57,28 @@ class StudentManager:
                 return "미흡"
         else:
             return "학생을 찾을 수 없습니다."
+        
+    def get_statistics(self):
+        if not self.students:
+            return "등록된 학생이 없습니다."
+
+        total_score = 0
+        highest_score = -1
+        highest_student = None
+        lowest_score = float('inf')
+        lowest_student = None
+
+        for student in self.students:
+            total_score += student.score    # 평균을 찾기 위해 더하기
+            if student.score > highest_score:   # 가장 높은 성적을 가진 학생을 찾기
+                highest_score = student.score
+                highest_student = student
+            if student.score < lowest_score:    # 가장 낮은 성적을 가진 학생을 찾기
+                lowest_score = student.score
+                lowest_student = student
+
+        average_score = total_score / len(self.students)
+        return f" \n평균 점수 : {average_score:.2f} \n=============\n 최고 점수: \n 이름: {highest_student.name} \n 학번: {highest_student.student_id} \n 성적 : {highest_student.score} \n=============\n 최저 점수: \n 이름: {lowest_student.name} \n 학번: {lowest_student.student_id} \n 성적: {lowest_student.score}"
 
 def main():
     student_manager = StudentManager()
@@ -69,7 +91,8 @@ def main():
         print("4. 학생 정보 삭제")
         print("5. 학생 성적 평가")
         print("6. 전체 학생 정보 출력")
-        print("7. 종료")
+        print("7. 통계")
+        print("8. 종료")
 
         choice = input("선택: ")
 
@@ -124,6 +147,8 @@ def main():
             for student in student_manager.students:
                 print(f"학번: {student.student_id}, 이름: {student.name}, 성적: {student.score}")
         elif choice == '7':
+            print(student_manager.get_statistics())
+        elif choice == '8':
             print("프로그램을 종료합니다.")
             break
         else:
