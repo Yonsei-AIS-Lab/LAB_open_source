@@ -37,6 +37,16 @@ def print_team_skills(team1, team2):
     print(f"{team1.name}: {team1.calculate_team_skill()}")
     print(f"{team2.name}: {team2.calculate_team_skill()}")
 
+def play_game(num_games):
+    # 여러 번의 경기 시뮬레이션 실행
+    for game in range(num_games):
+        print(f"\nGame {game + 1}: {simulate_game(team1, team2)}")
+
+    # 경기 결과 및 통계 출력
+    print("\nFinal Score:")
+    print_scoreboard(team1, team2)
+    print(determine_winner(team1, team2))
+
 # 선수 생성
 players1 = [Player("Player 1", 80), Player("Player 2", 85), Player("Player 3", 75)]
 players2 = [Player("Player 4", 78), Player("Player 5", 82), Player("Player 6", 79)]
@@ -45,22 +55,17 @@ players2 = [Player("Player 4", 78), Player("Player 5", 82), Player("Player 6", 7
 team1 = Team("Team A", players1)
 team2 = Team("Team B", players2)
 
-# 여러 번의 경기 시뮬레이션 실행
-num_games = 10
-for game in range(num_games):
-    print(f"\nGame {game + 1}: {simulate_game(team1, team2)}")
 
-# 경기 결과 및 통계 출력
-print("\nFinal Score:")
-print_scoreboard(team1, team2)
-print(determine_winner(team1, team2))
 
 # 추가 기능: 팀 스킬 레벨 출력
 while True:
-    user_choice = input("\n추가 기능 선택 (1: 팀 스킬 레벨, 2: 종료): ")
+    user_choice = input("\n추가 기능 선택 (0: 게임 실행, 1: 팀 스킬 레벨, 2: 종료): ")
     if user_choice == '1':
         print_team_skills(team1, team2)
     elif user_choice == '2':
         break
+    elif user_choice == '0':
+        num_game = int(input("실행하고 싶은 경기 수를 입력하시오: "))
+        play_game(num_game)
     else:
         print("잘못된 선택입니다. 다시 선택하세요.")
