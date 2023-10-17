@@ -57,7 +57,17 @@ def main():
             password = input("비밀번호 설정: ")  # 비밀번호 설정 추가
             account = BankAccount(account_number, owner, password)
             accounts.append(account)
+
             print("계좌가 생성되었습니다.")
+            for account in accounts:
+                if account.account_number == account_number:
+                    print("다른 계좌번호를 사용하세요.")
+                    break
+            else:
+                account = BankAccount(account_number, owner)
+                accounts.append(account)
+                print("계좌가 생성되었습니다.")
+                
         elif choice == '2':
             account_number = input("입금할 계좌번호: ")
             password = input("비밀번호 입력: ")  # 비밀번호 입력 추가
