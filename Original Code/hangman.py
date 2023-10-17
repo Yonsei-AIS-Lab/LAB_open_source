@@ -1,9 +1,17 @@
 import random
+import nltk # 더 많은 단어를 사용하기 위해서 nltk 라이브러리를 import함. 오류가 나면 pip install nltk를 하면 됨
+nltk.download('words')
 
 class HangmanGame:
     def __init__(self):
-        self.words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
-        self.secret_word = random.choice(self.words)
+        self.words = nltk.corpus.words.words()
+
+        # 단어 길이가 4보다 작을 경우 게임의 난이도를 위해 새로운 단어를 사용하기
+        while True:
+            self.secret_word = random.choice(self.words)
+            if len(self.secret_word) >= 4:
+                break
+        
         self.guesses_left = 6
         self.guessed_letters = []
 
