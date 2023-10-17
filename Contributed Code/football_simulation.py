@@ -10,6 +10,7 @@ class Team:
         self.name = name
         self.players = players
         self.score = 0
+        self.is_home = 0
 
     def calculate_team_skill(self):
         return sum(player.skill for player in self.players)
@@ -17,9 +18,24 @@ class Team:
 def simulate_game(team1, team2):
     team1_score = random.randint(0, 5)
     team2_score = random.randint(0, 5)
+    team1_is_home = random.randint(0, 1)
+    if team1_is_home == 1:
+        team1_score += 1
+        team1.is_home = 1
+        team2.is_home = 0
+    else:
+        team2_score += 1
+        team2.is_home = 1
+        team1.is_home = 0
     team1.score += team1_score
     team2.score += team2_score
-    return f"{team1.name} {team1_score} - {team2.name} {team2_score}"
+    return f"{team1.name} {team1_score} - {team2.name} {team2_score} : {get_home_stadium(team1, team2)}"
+
+def get_home_stadium(team1, team2):
+    if team1.is_home == 1:
+        return f"{team1.name}의 홈 경기"
+    else:
+        return f"{team2.name}의 홈 경기"
 
 def print_scoreboard(team1, team2):
     print(f"{team1.name}: {team1.score} - {team2.name}: {team2.score}")
