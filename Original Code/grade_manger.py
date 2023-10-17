@@ -9,8 +9,12 @@ class StudentManager:
         self.students = []
 
     def add_student(self, student):
-        self.students.append(student)
-        print(f"{student.name} 학생 정보가 추가되었습니다.")
+        existing_student = self.search_student(student.student_id)
+        if existing_student:
+            print(f"이미 존재하는 학번 ({student.student_id})입니다. 추가할 수 없습니다.")
+        else:
+            self.students.append(student)
+            print(f"{student.name} 학생 정보가 추가되었습니다.")
 
     def search_student(self, student_id):
         for student in self.students:
