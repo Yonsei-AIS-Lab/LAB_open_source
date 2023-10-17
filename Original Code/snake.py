@@ -26,6 +26,9 @@ w.addch(int(food[0]), int(food[1]), curses.ACS_PI)
 # 방향 설정
 key = curses.KEY_RIGHT
 
+# 점수 초기화
+score = 0
+
 # 게임 루프
 while True:
     next_key = w.getch()
@@ -33,11 +36,12 @@ while True:
 
     # 게임 종료 조건
     if (
-        snake[0][0] in [0, sh] or
-        snake[0][1] in [0, sw] or
+        snake[0][0] in [0, sh - 1] or
+        snake[0][1] in [0, sw - 1] or
         snake[0] in snake[1:]
     ):
         curses.endwin()
+        print("Score: ", score)
         quit()
 
     new_head = [snake[0][0], snake[0][1]]
@@ -54,6 +58,7 @@ while True:
 
     # 먹이 먹기
     if snake[0] == food:
+        score += 1
         food = None
         while food is None:
             nf = [
@@ -68,3 +73,5 @@ while True:
 
     snake.insert(0, new_head)
     w.addch(int(snake[0][0]), int(snake[0][1]), curses.ACS_CKBOARD)
+
+    w.addstr(0, 2, f"Score: {score}")
