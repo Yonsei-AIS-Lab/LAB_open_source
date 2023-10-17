@@ -40,6 +40,7 @@ class BankAccount:
 
 def main():
     accounts = []
+    admin_password = "admin" # 기본 패스워드
 
     while True:
         print("\n은행 계좌 관리 프로그램")
@@ -48,6 +49,7 @@ def main():
         print("3. 출금")
         print("4. 계좌 조회")
         print("5. 종료")
+        print("6. 직원") # 새 옵션 추가
 
         choice = input("선택: ")
 
@@ -101,6 +103,44 @@ def main():
         elif choice == '5':
             print("프로그램을 종료합니다.")
             break
+        elif choice == '6':
+            admin_password_input = input("관리자 비밀번호를 입력하세요: ")
+            if admin_password_input == admin_password:
+                while True:
+                    print("\n직원 메뉴")
+                    print("1. 전체 계좌 조회")
+                    print("2. 관리자 비밀번호 변경")
+                    print("3. 계좌 삭제")
+                    print("4. 돌아가기")
+
+                    admin_choice = input("선택: ")
+
+                    if admin_choice == '1':
+                        print("\n전체 계좌 정보")
+                        if accounts == []:
+                            print("등록된 계좌가 없습니다.")
+                        else:
+                            print("\n계좌번호 / 이름 / 잔액")
+                            for account in accounts:
+                                print(f"{account.account_number} / {account.owner} / {account.balance}")
+                    elif admin_choice == '2':
+                        admin_password = input("새로운 관리자 비밀번호를 입력하세요: ")
+                        print("관리자 비밀번호가 변경되었습니다.")
+                    elif admin_choice == '3':
+                        deleted_account = input("삭제할 계좌번호를 입력하세요: ")
+                        for account in accounts:
+                            if account.account_number == deleted_account:
+                                accounts.remove(account)
+                                print("삭제 완료")
+                                break
+                            else:
+                                print("계좌를 찾을 수 없습니다.")
+                    elif admin_choice == '4':
+                        break
+                    else:
+                        print("올바른 옵션을 선택하세요.")
+            else:
+                print("잘못된 비밀번호입니다. 다시 시도하세요.")
         else:
             print("올바른 옵션을 선택하세요.")
 
