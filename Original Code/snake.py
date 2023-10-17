@@ -1,5 +1,10 @@
 import curses
 import random
+import os
+import sys
+
+def restart():
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 # 게임 화면 설정
 stdscr = curses.initscr()
@@ -42,8 +47,15 @@ while True:
     ):
         curses.endwin()
         print("Score: ", score)
-        quit()
-
+        ans = input("게임을 재시작 하시겠습니까? (y/n) : ")
+        while True:
+            if ans == 'y':
+                restart()
+            elif ans =='n':
+                quit()
+            else:
+                print("잘못된 응답입니다. 다시 입력해주세요.")
+                ans = input("게임을 재시작 하시겠습니까? (y/n) : ")
     new_head = [snake[0][0], snake[0][1]]
 
     # 방향 설정
