@@ -56,7 +56,8 @@ def main():
         print("3. 학생 정보 수정")
         print("4. 학생 정보 삭제")
         print("5. 학생 성적 평가")
-        print("6. 종료")
+        print("6. 전체 학생 정보 출력")
+        print("7. 종료")
 
         choice = input("선택: ")
 
@@ -88,6 +89,10 @@ def main():
             else:
                 print("학생을 찾을 수 없습니다.")
         elif choice == '6':
+            print("\n전체 학생 정보")
+            for student in student_manager.students:
+                print(f"학번: {student.student_id}, 이름: {student.name}, 성적: {student.score}")
+        elif choice == '7':
             print("프로그램을 종료합니다.")
             break
         else:
