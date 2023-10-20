@@ -48,6 +48,13 @@ class TicketingSystem:
         else:
             print("No available tickets for this match.")
 
+    def display_matchs(self):
+        count = 1
+        for match in self.matches:
+            print(f"{count}. Match: {match.home_team} vs {match.away_team}, Stadium: {match.stadium}")
+            count += 1
+        return 
+    
 def main():
     ticketing_system = TicketingSystem()
 
@@ -69,6 +76,7 @@ def main():
             match = ticketing_system.create_match(date, home_team, away_team, stadium, max_capacity)
             print(f"Match created: {match.home_team} vs {match.away_team}")
         elif choice == "2":
+            ticketing_system.display_matchs()
             match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
@@ -76,6 +84,7 @@ def main():
             else:
                 print("Invalid match index.")
         elif choice == "3":
+            ticketing_system.display_matchs()
             match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
