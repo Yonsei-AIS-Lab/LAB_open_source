@@ -48,15 +48,26 @@ class TicketingSystem:
         else:
             print("No available tickets for this match.")
 
+    def delete_match(self, delete_index):
+        if delete_index < 0:
+            return print("Negative numbers cannot be entered.")
+        
+        if delete_index < len(self.matches):
+            del self.matches[delete_index]
+            return print(f"Success Delete {delete_index + 1} Match")
+        else:
+            return print(f"Can't Delete {delete_index + 1} Match")
+
 def main():
     ticketing_system = TicketingSystem()
 
     while True:
         print("\nTicketing System Menu:")
         print("1. Create Match")
-        print("2. Display Available Tickets")
-        print("3. Reserve Ticket")
-        print("4. Exit")
+        print("2. Delete Match")
+        print("3. Display Available Tickets")
+        print("4. Reserve Ticket")
+        print("5. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -69,13 +80,16 @@ def main():
             match = ticketing_system.create_match(date, home_team, away_team, stadium, max_capacity)
             print(f"Match created: {match.home_team} vs {match.away_team}")
         elif choice == "2":
+            delete_index = int(input("Enter delete match index: ")) - 1
+            ticketing_system.delete_match(delete_index)
+        elif choice == "3":
             match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
                 ticketing_system.display_available_tickets(match)
             else:
                 print("Invalid match index.")
-        elif choice == "3":
+        elif choice == "4":
             match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
@@ -87,7 +101,7 @@ def main():
                     print("Ticket is not available or already reserved.")
             else:
                 print("Invalid match index.")
-        elif choice == "4":
+        elif choice == "5":
             print("Exiting Ticketing System.")
             break
         else:
