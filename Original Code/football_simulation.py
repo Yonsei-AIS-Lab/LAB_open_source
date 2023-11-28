@@ -27,6 +27,20 @@ def simulate_game(team1, team2):
     else: # 두 팀의 skill 합이 같은 경우
         team1_score = random.randint(0, 4)
         team2_score = random.randint(0, 4)
+    team1_score = random.randint(0, 5)
+    team2_score = random.randint(0, 5)
+    # 일정한 확률에 따라 주심이 오심을 해서 골이 취소되는 코드를 추가했습니다.
+    prob_mis = random.randint(0, 10)
+    if prob_mis > 8: # 10%의 확률에 해당하면
+        team_fail = random.randint(0, 2)
+        if team_fail == 0: # 팀1이 억울하게 취소당한 경우
+            if team1_score > 0:
+                team1_score -= 1
+                print("주심에 오심으로 팀1의 골이 인정되지 않았습니다!")
+        else:
+            if team2_score > 0:
+                team2_score -= 1
+                print("주심에 오심으로 팀2의 골이 인정되지 않았습니다!")
     team1.score += team1_score
     team2.score += team2_score
 
