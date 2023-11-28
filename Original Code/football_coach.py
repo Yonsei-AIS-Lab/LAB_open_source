@@ -47,9 +47,12 @@ def main():
         if choice == '1':
             name = input("선수 이름: ")
             skill_level = int(input("선수 스킬 레벨: "))
-            player = Player(name, skill_level)
-            players[name] = player
-            print(f"{name} 선수가 추가되었습니다.")
+            if skill_level >= 0:
+                player = Player(name, skill_level)
+                players[name] = player
+                print(f"{name} 선수가 추가되었습니다.")
+            else:
+                raise ValueError("선수 스킬 레벨은 음수가 될 수 없습니다.")
 
         elif choice == '2':
             name = input("코치 이름: ")
