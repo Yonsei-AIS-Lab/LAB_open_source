@@ -86,6 +86,7 @@ while True:
         print("\n가능한 총 목록:")
         for i, gun in enumerate(guns, 1):
             print(f"{i}. {gun.name} - 가격: {gun.price} 포인트")
+        print(f"\n현재 보유한 포인트 : {player_points} 포인트")
         buy_choice = input("구매할 총을 선택하세요 (또는 '취소'): ").strip()
         if buy_choice == '취소':
             continue
@@ -97,6 +98,7 @@ while True:
                     player_points -= selected_gun.price
                     player_inventory.append(selected_gun)
                     print(f"{selected_gun.name}을(를) 구매하셨습니다!")
+                    print(f"\n구매하고 남은 포인트 : {player_points} 포인트")
                 else:
                     print("포인트가 부족하여 총을 구매할 수 없습니다.")
             else:
@@ -117,6 +119,7 @@ while True:
                     sold_gun = player_inventory.pop(sell_choice - 1)
                     player_points += sold_gun.price // 2
                     print(f"{sold_gun.name}을(를) 판매하셨습니다. 받은 포인트: {sold_gun.price // 2} 포인트")
+                    print(f"현재 보유한 포인트 : {player_points} 포인트")
                 else:
                     print("잘못된 선택입니다.")
             else:
