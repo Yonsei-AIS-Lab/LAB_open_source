@@ -53,15 +53,26 @@ class TicketingSystem:
             count += 1
         return 
     
+    def delete_match(self, delete_index):
+        if delete_index < 0:
+            return print("Negative numbers cannot be entered.")
+        
+        if delete_index < len(self.matches):
+            del self.matches[delete_index]
+            return print(f"Success Delete {delete_index + 1} Match")
+        else:
+            return print(f"Can't Delete {delete_index + 1} Match")
+
 def main():
     ticketing_system = TicketingSystem()
 
     while True:
-        print("\n티켓 예매 시스템 메뉴:")
-        print("1. 경기 생성")
-        print("2. 사용 가능한 티켓 보기")
-        print("3. 티켓 예매")
-        print("4. 종료")
+        print("\nTicketing System Menu:")
+        print("1. Create Match")
+        print("2. Delete Match")
+        print("3. Display Available Tickets")
+        print("4. Reserve Ticket")
+        print("5. Exit")
 
         choice = input("원하는 작업을 선택하세요: ")
 
@@ -75,15 +86,16 @@ def main():
             match = ticketing_system.create_match(date, home_team, away_team, stadium, max_capacity, price)
             print(f"경기가 생성되었습니다: {match.home_team} vs {match.away_team}")
         elif choice == "2":
-            ticketing_system.display_matchs()
+            delete_index = int(input("Enter delete match index: ")) - 1
+            ticketing_system.delete_match(delete_index)
+        elif choice == "3":
             match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
                 ticketing_system.display_available_tickets(match)
             else:
-                print("유효하지 않은 경기 인덱스입니다.")
-        elif choice == "3":
-            ticketing_system.display_matchs()
+                print("Invalid match index.")
+        elif choice == "4":
             match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
@@ -94,9 +106,9 @@ def main():
                 else:
                     print("티켓을 사용할 수 없거나 이미 예약되었습니다.")
             else:
-                print("유효하지 않은 경기 인덱스입니다.")
-        elif choice == "4":
-            print("티켓 예매 시스템을 종료합니다.")
+                print("Invalid match index.")
+        elif choice == "5":
+            print("Exiting Ticketing System.")
             break
         else:
             print("유효하지 않은 선택입니다. 유효한 옵션을 선택하세요.")
