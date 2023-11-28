@@ -10,7 +10,7 @@ class Player:
         self.stats = {'goals': 0, 'assists': 0}
 
     def __str__(self):
-        return f"{self.name}, {self.age}세, {self.position}, 소속 클럽: {self.club.name}, 시장 가치: ${self.market_value}M"
+        return f"{self.name}, {self.age}세, {self.position}, 시장 가치: ${self.market_value}M, 현재 소속팀: {self.club}, 득점: {self.stats['goals']}, 도움: {self.stats['assists']}"
 
     def transfer(self, new_club, transfer_fee):
         if new_club.budget >= transfer_fee:
@@ -56,6 +56,17 @@ def main():
         Player("Cristiano Ronaldo", 36, "Forward", madrid, 90_000_000),
         Player("Neymar", 29, "Forward", barcelona, 120_000_000),
     ]
+
+    # players 골, 도움 기록 추가
+    for i in range(30):
+        players[0].score_goal()
+        players[0].provide_assist()
+    for i in range(15):
+        players[1].score_goal()
+        players[1].provide_assist()
+    for i in range(27):
+        players[2].score_goal()
+        players[2].provide_assist()
 
     while True:
         print("\n메뉴:")
