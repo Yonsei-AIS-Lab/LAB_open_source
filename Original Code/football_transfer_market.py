@@ -84,6 +84,10 @@ def main():
                     barcelona.sign_player(players[player_choice], transfer_fee)
                 else:
                     madrid.sign_player(players[player_choice], transfer_fee)
+            elif player_choice < 0 and player_choice > len(players):
+                print("잘못된 선수 번호 입력입니다.")
+            elif club_choice != 1 and club_choice != 2:
+                print("잘못된 클럽 번호 입력입니다.")
         elif choice == '3':
             print(barcelona)
             print(madrid)
