@@ -69,6 +69,15 @@ def create_players(skill):
         rating = base_rating + random.randint(0, skill+1) # random한 능력치 배부
         players.append(Player(f"Player {idx+1}", rating))
     return players
+def play_game(num_games):
+    # 여러 번의 경기 시뮬레이션 실행
+    for game in range(num_games):
+        print(f"\nGame {game + 1}: {simulate_game(team1, team2)}")
+
+    # 경기 결과 및 통계 출력
+    print("\nFinal Score:")
+    print_scoreboard(team1, team2)
+    print(determine_winner(team1, team2))
 
 # 선수 생성
 team1_skill = int(input("팀 1의 실력을 입력하시오(1~20): "))
@@ -80,22 +89,17 @@ players2 = create_players(team2_skill)
 team1 = Team("Team A", players1)
 team2 = Team("Team B", players2)
 
-# 여러 번의 경기 시뮬레이션 실행
-num_games = 10
-for game in range(num_games):
-    print(f"\nGame {game + 1}: {simulate_game(team1, team2)}")
 
-# 경기 결과 및 통계 출력
-print("\nFinal Score:")
-print_scoreboard(team1, team2)
-print(determine_winner(team1, team2))
 
 # 추가 기능: 팀 스킬 레벨 출력
 while True:
-    user_choice = input("\n추가 기능 선택 (1: 팀 스킬 레벨, 2: 종료): ")
+    user_choice = input("\n추가 기능 선택 (0: 게임 실행, 1: 팀 스킬 레벨, 2: 종료): ")
     if user_choice == '1':
         print_team_skills(team1, team2)
     elif user_choice == '2':
         break
+    elif user_choice == '0':
+        num_game = int(input("실행하고 싶은 경기 수를 입력하시오: "))
+        play_game(num_game)
     else:
         print("잘못된 선택입니다. 다시 선택하세요.")
