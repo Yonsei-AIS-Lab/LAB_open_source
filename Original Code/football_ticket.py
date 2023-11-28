@@ -16,21 +16,19 @@ class Match:
         self.max_capacity = max_capacity
         self.tickets = []
 
-    def add_ticket(self, seat, price):
-        if len(self.tickets) < self.max_capacity:
-            ticket = Ticket(self, seat, price)
+    def add_ticket(self, price):
+        for i in range(self.max_capacity):
+            ticket = Ticket(self, str(i+1), price)
             self.tickets.append(ticket)
-            return ticket
-        else:
-            return None
 
 class TicketingSystem:
     def __init__(self):
         self.matches = []
 
-    def create_match(self, date, home_team, away_team, stadium, max_capacity):
+    def create_match(self, date, home_team, away_team, stadium, max_capacity, price):
         match = Match(date, home_team, away_team, stadium, max_capacity)
         self.matches.append(match)
+        match.add_ticket(price)
         return match
 
     def reserve_ticket(self, match, seat):
@@ -66,7 +64,8 @@ def main():
             away_team = input("원정 팀 입력: ")
             stadium = input("경기장 입력: ")
             max_capacity = int(input("최대 수용 가능 인원 입력: "))
-            match = ticketing_system.create_match(date, home_team, away_team, stadium, max_capacity)
+            price = int(input("Enter ticket price: "))
+            match = ticketing_system.create_match(date, home_team, away_team, stadium, max_capacity, price)
             print(f"경기가 생성되었습니다: {match.home_team} vs {match.away_team}")
         elif choice == "2":
             match_index = int(input("경기 인덱스 입력: ")) - 1
