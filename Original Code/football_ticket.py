@@ -46,6 +46,13 @@ class TicketingSystem:
         else:
             print("이 경기에 대한 사용 가능한 티켓이 없습니다.")
 
+    def display_matchs(self):
+        count = 1
+        for match in self.matches:
+            print(f"{count}. Match: {match.home_team} vs {match.away_team}, Stadium: {match.stadium}")
+            count += 1
+        return 
+    
 def main():
     ticketing_system = TicketingSystem()
 
@@ -68,14 +75,16 @@ def main():
             match = ticketing_system.create_match(date, home_team, away_team, stadium, max_capacity, price)
             print(f"경기가 생성되었습니다: {match.home_team} vs {match.away_team}")
         elif choice == "2":
-            match_index = int(input("경기 인덱스 입력: ")) - 1
+            ticketing_system.display_matchs()
+            match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
                 ticketing_system.display_available_tickets(match)
             else:
                 print("유효하지 않은 경기 인덱스입니다.")
         elif choice == "3":
-            match_index = int(input("경기 인덱스 입력: ")) - 1
+            ticketing_system.display_matchs()
+            match_index = int(input("Enter match index: ")) - 1
             if 0 <= match_index < len(ticketing_system.matches):
                 match = ticketing_system.matches[match_index]
                 seat = input("좌석 번호 입력: ")
