@@ -37,9 +37,19 @@ def print_team_skills(team1, team2):
     print(f"{team1.name}: {team1.calculate_team_skill()}")
     print(f"{team2.name}: {team2.calculate_team_skill()}")
 
+def create_players(skill):
+    players = []
+    base_rating = 70
+    for idx in range(0, 11):
+        rating = base_rating + random.randint(0, skill+1) # random한 능력치 배부
+        players.append(Player(f"Player {idx+1}", rating))
+    return players
+
 # 선수 생성
-players1 = [Player("Player 1", 80), Player("Player 2", 85), Player("Player 3", 75)]
-players2 = [Player("Player 4", 78), Player("Player 5", 82), Player("Player 6", 79)]
+team1_skill = int(input("팀 1의 실력을 입력하시오(1~20): "))
+players1 = create_players(team1_skill)
+team2_skill = int(input("팀 2의 실력을 입력하시오(1~20): "))
+players2 = create_players(team2_skill)
 
 # 팀 생성
 team1 = Team("Team A", players1)
