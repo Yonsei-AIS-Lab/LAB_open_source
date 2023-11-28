@@ -23,7 +23,7 @@ guns = [
 ]
 
 player_points = 5000  # 초기 포인트 설정
-player_inventory = []  # 플레이어 보유 총 리스트
+player_inventory = {}  # 플레이어 보유 총 리스트
 
 # 메뉴 함수 정의
 def show_menu():
@@ -34,6 +34,8 @@ def show_menu():
     print("4. 종료")
     print("5. 사격장")
     print("6. 총 조회")
+    print("7. 포인트 충전")
+    print("8. 종료")
 
 def shooting_range():
     print("\n사격장에 오신 걸 환영합니다.")
@@ -69,12 +71,13 @@ def shooting_range():
     time.sleep(5)
         
 
+
 # 게임 루프
 while True:
     show_menu()
     choice = input("원하는 작업을 선택하세요: ").strip()
 
-    if choice == '4':
+    if choice == '8':
         print("게임 종료")
         break
     elif choice == '5':
@@ -97,7 +100,11 @@ while True:
                 selected_gun = guns[buy_choice - 1]
                 if player_points >= selected_gun.price:
                     player_points -= selected_gun.price
-                    player_inventory.append(selected_gun)
+                    if selected_gun.name in player_inventory:
+                        player_inventory[selected_gun.name][1] += 1 
+                    else:
+                        player_inventory[selected_gun.name] = [selected_gun, 1]
+                        #print(player_inventory[selected_gun.name][1])
                     print(f"{selected_gun.name}을(를) 구매하셨습니다!")
                     print(f"\n구매하고 남은 포인트 : {player_points} 포인트")
                 else:
@@ -109,8 +116,8 @@ while True:
     elif choice == '3':
         if len(player_inventory) > 0:
             print("\n판매할 총 목록:")
-            for i, gun in enumerate(player_inventory, 1):
-                print(f"{i}. {gun.name} - 가격: {gun.price // 2} 포인트")
+            for i, (_, gunL) in enumerate(player_inventory.items(), 1):
+                print(f"{i}. {gunL[0].name} - 가격: {gunL[0].price // 2} 포인트, {gunL[1]}개")
             sell_choice = input("판매할 총을 선택하세요 (또는 '취소'): ").strip()
             if sell_choice == '취소':
                 continue
@@ -121,6 +128,11 @@ while True:
                     player_points += sold_gun.price // 2
                     print(f"{sold_gun.name}을(를) 판매하셨습니다. 받은 포인트: {sold_gun.price // 2} 포인트")
                     print(f"현재 보유한 포인트 : {player_points} 포인트")
+                    selected_gun_name = list(player_inventory.keys())[sell_choice - 1]
+                    if player_inventory[selected_gun_name][1] == 1:
+                        del player_inventory[selected_gun_name]
+                    else:
+                        player_inventory[selected_gun_name][1] -= 1
                 else:
                     print("잘못된 선택입니다.")
             else:
@@ -150,5 +162,13 @@ while True:
                 print("잘못된 선택입니다.")
         else:
             print("잘못된 입력입니다. 숫자를 입력하세요.")
+    elif choice == '7':
+        print('현재 포인트: ', player_points)
+        print('\n충전할 포인트를 입력해주세요: ', end='')
+        try:
+            point = int(input())
+            player_points += point
+        except ValueError:
+            print('잘못된 입력입니다.')
     else:
         print("잘못된 선택입니다. 다시 선택하세요.")
