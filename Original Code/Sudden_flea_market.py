@@ -1,3 +1,6 @@
+import time
+import random
+
 class Gun:
     def __init__(self, name, damage, fire_rate, accuracy, recoil, ammo, gun_type, price):
         self.name = name
@@ -29,6 +32,41 @@ def show_menu():
     print("2. 총 구매")
     print("3. 총 판매")
     print("4. 종료")
+    print("5. 사격장")
+
+def shooting_range():
+    print("\n사격장에 오신 걸 환영합니다.")
+    print("\n사용할 총 목록:")
+    for i, gun in enumerate(guns, 1):
+        print(f"{i}. {gun.name} - 데미지: {gun.damage} 포인트 - 연사력: {gun.fire_rate}")
+    gun_choice = int(input("사용할 총 번호를 입력하시오: "))
+    my_gun = guns[gun_choice-1]
+    my_gun_name = my_gun.name
+    my_gun_dam = my_gun.damage
+    my_gun_rate = my_gun.fire_rate
+    my_gun_bullets = 30
+    my_gun_left_bullets = my_gun_bullets
+    print(f"사용할 총은 {my_gun_name}입니다. 데미지는 {my_gun_dam}이고 연사력은 {my_gun_rate}입니다.")
+    time.sleep(2)
+    print("총알은 30발 드리겠습니다.")
+    time.sleep(2)
+    dummy = 100
+    print(f"더미의 체력은 {dummy}입니다. 더미를 사살하십시오.")
+    time.sleep(1)
+    
+    while (dummy > 0):
+        dummy -= random.randint(int(my_gun_dam/2),my_gun_dam)
+        my_gun_left_bullets -= 1
+        if dummy < 0:
+            dummy = 0
+        print(f"총알 ({my_gun_left_bullets}/30) 더미의 남은 체력: {dummy}")
+        if my_gun_rate == 0:
+            print('장전을 하는 데 시간이 걸립니다.')
+            time.sleep(1)
+    print("더미를 사살하였습니다.")
+    print("5초 후 사격장을 종료합니다.")
+    time.sleep(5)
+        
 
 # 게임 루프
 while True:
@@ -38,6 +76,8 @@ while True:
     if choice == '4':
         print("게임 종료")
         break
+    elif choice == '5':
+        shooting_range()
     elif choice == '1':
         print("\n가능한 총 목록:")
         for i, gun in enumerate(guns, 1):
