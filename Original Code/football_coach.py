@@ -1,3 +1,5 @@
+import random
+
 class Player:
     def __init__(self, name, skill_level):
         self.name = name
@@ -23,9 +25,10 @@ class Team:
     def add_player(self, player):
         self.players.append(player)
 
-    def train_players(self):
+    def train_players(self, probability=0.5):
         for player in self.players:
-            player.train()
+            if random.random() < probability:
+                player.train()
         print(f"{self.name} 팀의 선수들이 훈련을 받았습니다.")
     
     @classmethod    
