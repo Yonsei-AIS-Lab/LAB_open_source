@@ -91,9 +91,24 @@ team2 = Team("Team B", players2)
 
 
 
+def transfer(team):
+    print('컴퓨터와 가위, 바위, 보를 해서 이기면 선수를 영입할 수 있습니다.')
+    your_choice = int(input("가위=0, 바위=1, 보=2: "))
+    pc_choice = random.randint(0, 3)
+    if your_choice == 0 and pc_choice == 2 or your_choice == 1 and pc_choice == 0 or your_choice == 2 and pc_choice == 1:
+        print("축하드립니다. 이겼습니다!")
+        len_team = len(team.players)
+        # 팀의 마지막 선수를 호날두로 교채
+        team.players[len_team-1] = Player("호X두", 100)
+        print("현재 팀의 모습입니다!")
+        for idx in range(0, len_team):
+            print(f"선수이름: {team.players[idx].name}, 선수 능력치: {team.players[idx].skill}")
+    else:
+        print("못 이겼습니다 ㅋㅋ")
+
 # 추가 기능: 팀 스킬 레벨 출력
 while True:
-    user_choice = input("\n추가 기능 선택 (0: 게임 실행, 1: 팀 스킬 레벨, 2: 종료): ")
+    user_choice = input("\n추가 기능 선택 (1: 팀 스킬 레벨, 2: 종료, 3: 선수 영입): ")
     if user_choice == '1':
         print_team_skills(team1, team2)
     elif user_choice == '2':
@@ -101,5 +116,11 @@ while True:
     elif user_choice == '0':
         num_game = int(input("실행하고 싶은 경기 수를 입력하시오: "))
         play_game(num_game)
+    elif user_choice == '3':
+        select_team = int(input("선수를 영입할 팀을 선택하시오 (1, 2):"))
+        if select_team ==  1:
+            transfer(team1)
+        else:
+            transfer(team2)
     else:
         print("잘못된 선택입니다. 다시 선택하세요.")
