@@ -33,6 +33,7 @@ def show_menu():
     print("3. 총 판매")
     print("4. 종료")
     print("5. 사격장")
+    print("6. 총 조회")
 
 def shooting_range():
     print("\n사격장에 오신 걸 환영합니다.")
@@ -126,5 +127,28 @@ while True:
                 print("잘못된 입력입니다. 숫자를 입력하세요.")
         else:
             print("보유한 총이 없습니다.")
+    elif choice == '6':
+        print("\n가능한 총 목록:")
+        for i, gun in enumerate(guns, 1):
+            print(f"{i}. {gun.name} - 가격: {gun.price} 포인트")
+        inspect_gun_choice = input("조회할 총을 선택하세요 (또는 '취소'): ").strip()
+        if inspect_gun_choice == '취소':
+            continue
+        if inspect_gun_choice.isdigit():
+            inspect_gun_choice = int(inspect_gun_choice)
+            if 1 <= inspect_gun_choice <= len(guns):
+                inspected_gun = guns[inspect_gun_choice - 1]
+                print(f"\n총 이름: {inspected_gun.name}")
+                print(f"데미지: {inspected_gun.damage}")
+                print(f"발사 속도: {inspected_gun.fire_rate}")
+                print(f"정확도: {inspected_gun.accuracy}")
+                print(f"반동: {inspected_gun.recoil}")
+                print(f"탄약: {inspected_gun.ammo}")
+                print(f"총 종류: {inspected_gun.gun_type}")
+                print(f"가격: {inspected_gun.price} 포인트")
+            else:
+                print("잘못된 선택입니다.")
+        else:
+            print("잘못된 입력입니다. 숫자를 입력하세요.")
     else:
         print("잘못된 선택입니다. 다시 선택하세요.")
