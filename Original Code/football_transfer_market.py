@@ -10,7 +10,7 @@ class Player:
         self.stats = {'goals': 0, 'assists': 0}
 
     def __str__(self):
-        return f"{self.name}, {self.age}세, {self.position}, 시장 가치: ${self.market_value}M"
+        return f"{self.name}, {self.age}세, {self.position}, 소속 클럽: {self.club.name}, 시장 가치: ${self.market_value}M"
 
     def transfer(self, new_club, transfer_fee):
         if new_club.budget >= transfer_fee:
